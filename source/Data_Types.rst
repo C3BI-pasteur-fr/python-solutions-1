@@ -1,5 +1,8 @@
-.. _Variables:
+.. sectnum:: 
+   :start: 3
 
-************************************
-Variables, Expression and statements
-************************************
+.. _Data_Types:
+
+**********
+Data Types
+**********
