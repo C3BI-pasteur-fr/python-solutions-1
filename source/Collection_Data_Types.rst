@@ -11,6 +11,61 @@ Collection Data Types
 Exercices
 =========
 
+Exercice
+--------
+
+Draw the representation in memory of the following expressions.
+what is the data type of each object.
+
+
+::   
+
+   x = [1, 2, 3, 4]
+   y = x[1]
+   y = 3.14
+   x[1] = 'foo'
+   
+
+Exercice
+--------
+
+wihout using python shell, what is the results of the following statements:  
+ 
+.. note:: 
+   sum is a function which return the sum of each elements of a list.
+      
+::
+ 
+   x = [1, 2, 3, 4]
+   x[3] = -4 # what is the value of x now ?
+   y = sum(x)/len(x) #what is the value of y ? why ?
+   
+   y = 0
+
+because sum(x) is an integer, len(x) is also an integer so in python2.x the result is an integer, 
+all the digits after the periods are discarded.
+In python3 we will obtain the expected result (see :ref:``) 
+   
+   
+Exercice
+--------
+
+How to compute safely the average of a list? ::
+
+   float(sum(l))/float(len(l)
+
+exercise
+--------
+
+generate a list containing all codons. ::
+
+   codons = []
+      for a in 'acgt':
+         for b in 'acgt':
+            for c in 'acgt':
+               codon = a + b + c
+               codons.append(codon)
+               
 exercice
 --------
 
@@ -24,6 +79,101 @@ For example: ::
 solution ::
 
    >>> list(set(l))
+
+               
+
+exercice
+--------
+
+let the following enzymes collection: ::
+ 
+   import collections
+   RestrictEnzyme = collections.namedtuple("RestrictEnzyme", "name comment sequence cut end")
+
+   ecor1 = RestrictEnzyme("EcoRI", "Ecoli restriction enzime I", "gaattc", 1, "sticky")
+   ecor5 = RestrictEnzyme("EcoRV", "Ecoli restriction enzime V", "gatatc", 3, "blunt")
+   bamh1 = RestrictEnzyme("BamHI", "type II restriction endonuclease from Bacillus amyloliquefaciens ", "ggatcc", 1, "sticky")
+   hind3 = RestrictEnzyme("HindIII", "type II site-specific nuclease from Haemophilus influenzae", "aagctt", 1 , "sticky")
+   taq1 = RestrictEnzyme("TaqI", "Thermus aquaticus", "tcga", 1 , "sticky")
+   not1 = RestrictEnzyme("NotI", "Nocardia otitidis", "gcggccgc", 2 , "sticky")
+   sau3a1 = RestrictEnzyme("Sau3aI", "Staphylococcus aureus", "gatc", 0 , "sticky")
+   hae3 = RestrictEnzyme("HaeIII", "Haemophilus aegyptius", "ggcc", 2 , "blunt")
+   sma1 =  RestrictEnzyme("SmaI", "Serratia marcescens", "cccggg", 3 , "blunt")
+
+and the 2 dna fragments: ::
+
+   dna_1 = """tcgcgcaacgtcgcctacatctcaagattcagcgccgagatccccgggggttgagcgatccccgtcagttggcgtgaattcag
+   cagcagcgcaccccgggcgtagaattccagttgcagataatagctgatttagttaacttggatcacagaagcttccaga
+   ccaccgtatggatcccaacgcactgttacggatccaattcgtacgtttggggtgatttgattcccgctgcctgccagg"""
+
+   dna_2 = """gagcatgagcggaattctgcatagcgcaagaatgcggccgcttagagcgatgctgccctaaactctatgcagcgggcgtgagg
+   attcagtggcttcagaattcctcccgggagaagctgaatagtgaaacgattgaggtgttgtggtgaaccgagtaag
+   agcagcttaaatcggagagaattccatttactggccagggtaagagttttggtaaatatatagtgatatctggcttg"""
+
+| which enzymes cut the dna_1 ?
+|                  the dna_2 ?
+|                  the dna_1 but not the dna_2?
+
+::
+
+   dna_1 = dna_1.replace('\n', '')
+   dans_2 = dna_2.replace('\n', '')
+   
+   enzymes = [ecor1, ecor5, bamh1, hind3, taq1, not1, sau3a1, hae3, sma1]
+   digest_1 = []
+   for enz in enzymes:
+      pos = dna_1.find(enz.sequence)
+      if pos != -1:
+         digest_1.append(enz)
+
+with this first algorithm we find if an enzyme cut the dna but we cannot find all cuts in the dna for an enzyme.
+If we find a cutting site, we must search again starting at the first nucleotid after the begining of the match 
+until the end of the the dna, for this we use the start parameter of the find function, and so on. 
+As we don't know how many loop we need to scan the dna until the end we use a ``while`` loop testing for the presence of a cutting site.::  
+
+   digest_1 = []
+   for enz in enzymes:
+      pos = dna_1.find(enz.sequence)
+      while pos != -1:
+         digest_1.append(enz)
+         pos = dna_1.find(enz.sequence, pos + 1)
+         
+   digest_2 = []
+   for enz in enzymes:
+      pos = dna_2.find(enz.sequence)
+      while pos != -1:
+         digest_2.append(enz)
+         pos = dna_2.find(enz.sequence, pos + 1)  
+                
+   cut_dna_1 = set(digest_1)
+   cut_dna_2 = set(digest_2)
+   cut_dna_1_not_dna_2 = cut_dna_1 - cut_dna_2
+         
+If we want also the position, for instance to compute the fragments of dna. ::
+
+   digest_1 = []
+   for enz in enzymes:
+      pos = dna_1.find(enz.sequence)
+      while pos != -1:
+         digest_1.append((enz, pos))
+         pos = dna_1.find(enz.sequence, pos + 1)
+    
+   from operator import itemgetter
+   digest_1.sort(key=itemgetter(1))
+   [(e.name, d) for e, d in digest_1]
+   
+   digest_2 = []
+   for enz in enzymes:
+      pos = dna_2.find(enz.sequence)
+      while pos != -1:
+         digest_2.append((enz, pos))
+         pos = dna_2.find(enz.sequence, pos + 1)
+           
+   cut_dna_1 = set([e.name for e in digest_1])
+   cut_dna_2 = set([e.name for e in digest_2])
+   cut_dna_1_not_dna_2 = cut_dna_1 - cut_dna_2
+   
+   
 
 
 exercice
