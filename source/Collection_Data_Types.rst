@@ -14,9 +14,8 @@ Exercices
 Exercice
 --------
 
-Draw the representation in memory of the following expressions.
-what is the data type of each object.
-
+| Draw the representation in memory of the following expressions.
+| what is the data type of each object?
 
 ::   
 
@@ -24,6 +23,11 @@ what is the data type of each object.
    y = x[1]
    y = 3.14
    x[1] = 'foo'
+   
+.. figure:: _static/figs/list_1.png
+   :width: 400px
+   :alt: set
+   :figclass: align-center
    
 
 Exercice
@@ -57,6 +61,47 @@ How to compute safely the average of a list? ::
 exercise
 --------
 
+Draw the representation in memory of the following expressions. ::
+
+   x = [1, ['a','b','c'], 3, 4]
+   y = x[1]
+   y[2] = 'z'
+   # what is the value of x ?
+   
+.. figure:: _static/figs/list_2-1.png
+   :width: 400px
+   :alt: set
+   :figclass: align-center
+   
+
+.. container:: clearer
+
+    .. image :: _static/figs/spacer.png
+       
+ When we execute *y = x[1]*, we create ``y`` wich reference the list ``['a', 'b', 'c']``.
+ This list has 2 references on it: ``y`` and ``x[1]`` .
+   
+   
+.. figure:: _static/figs/list_2-2.png
+   :width: 400px
+   :alt: set
+   :figclass: align-center
+ 
+   
+.. container:: clearer
+
+    .. image :: _static/figs/spacer.png
+       
+   
+ This object is a list so it is a mutable object.
+ So we can access **and** modify it by the two ways ``y`` or ``x[1]`` ::
+ 
+   x = [1, ['a','b','z'], 3, 4]
+    
+    
+exercise
+--------
+   
 generate a list containing all codons. ::
 
    codons = []
