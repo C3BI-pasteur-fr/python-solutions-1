@@ -275,6 +275,16 @@ solution ::
    for kmer, occurence in kmers.items():
       print kmer, " = ", occurence
 
+we can use also a defaultdict: ::
+
+   import collections
+   
+   s = s.replace('\n', '')
+   kmers = collection.defaultdict(int)
+   for i in range(len(s) - 3):
+      kmer = s[i:i+3]
+      kmers[kmer] += 1
+
 solution bonus ::
 
    list_of_kmers = kmers.items()  
