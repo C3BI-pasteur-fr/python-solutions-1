@@ -56,7 +56,7 @@ Exercice
 
 How to compute safely the average of a list? ::
 
-   float(sum(l))/float(len(l)
+   float(sum(l)) / float(len(l))
 
 exercise
 --------
@@ -318,6 +318,12 @@ solution ::
    for key in d.keys():
        inverted_d[d[key]] = key
        
+solution ::
+
+   inverted_d = {}
+   for key, value in d.items():
+       inverted_d[value] = key
+              
 solution ::
 
    inverted_d = {v : k for k, v in d.items()}
