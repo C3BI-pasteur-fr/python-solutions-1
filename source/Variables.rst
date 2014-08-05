@@ -8,9 +8,9 @@ Variables, Expression and statements
 ************************************
 
 
-Exercices
+Exercises
 =========
 
-exercice
+Exercise
 --------
 blabla

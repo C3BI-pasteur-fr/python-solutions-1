@@ -8,10 +8,10 @@
 Collection Data Types
 *********************
 
-Exercices
+Exercises
 =========
 
-Exercice
+Exercise
 --------
 
 | Draw the representation in memory of the following expressions.
@@ -29,8 +29,38 @@ Exercice
    :alt: set
    :figclass: align-center
    
+::
 
-Exercice
+   x = [1, 2, 3, 4]
+   x += [5, 6]
+
+.. figure:: _static/figs/augmented_assignment_list.png  
+   :width: 400px
+   :alt: set
+   :figclass: align-center 
+
+::
+
+   >>> x = [1, 2, 3, 4]
+   >>> id(x)
+   139950507563632
+   >>> x += [5,6]
+   >>> id(x)
+   139950507563632
+   
+
+compare with the exercise on string and integers:
+
+Since list are mutable, when ``+=`` is used the original list object is modified, so no rebinding of *x* is necessary.
+We can observe this using *id()* which give the memory adress of an object. This adress does not change after the
+``+=`` operation.
+
+.. note::
+   even the results is the same ther is a subtelty to use augmented operator.
+   in ``a operator= b`` python looks up ``a`` ’s value only once, so it is potentially faster
+   than the ``a = a operator b``.
+
+Exercise
 --------
 
 wihout using python shell, what is the results of the following statements:  
@@ -51,14 +81,14 @@ all the digits after the periods are discarded.
 In python3 we will obtain the expected result (see :ref:``) 
    
    
-Exercice
+Exercise
 --------
 
 How to compute safely the average of a list? ::
 
    float(sum(l)) / float(len(l))
 
-exercise
+Exercise
 --------
 
 Draw the representation in memory of the following expressions. ::
@@ -98,20 +128,30 @@ Draw the representation in memory of the following expressions. ::
  
    x = [1, ['a','b','z'], 3, 4]
     
+Exercise
+--------
+
+from the list l = [1, 2, 3, 4, 5, 6, 7, 8, 9] generate 2 lists l1 containing all odd values, and l2 all even values.::
+
+   l = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+   l1 = l[::2]
+   l2 = l[1::2]
+
     
-exercise
+Exercise
 --------
    
 generate a list containing all codons. ::
-
+   
+   bases = 'acgt'
    codons = []
-      for a in 'acgt':
-         for b in 'acgt':
-            for c in 'acgt':
+      for a in bases:
+         for b in bases:
+            for c in bases:
                codon = a + b + c
                codons.append(codon)
                
-exercice
+Exercise
 --------
 
 From a list return a new list without any duplicate, regardless of the order of items. 
@@ -127,7 +167,7 @@ solution ::
 
                
 
-exercice
+Exercise
 --------
 
 let the following enzymes collection: ::
@@ -221,7 +261,7 @@ If we want also the position, for instance to compute the fragments of dna. ::
    
 
 
-exercice
+Exercise
 --------
 From a list return a new list without any duplicate, but keeping the order of items. 
 For example: ::
@@ -242,7 +282,7 @@ solution ::
    >>> uniq_items = set()
    >>> l_uniq = [x for x in l if x not in uniq_items and not uniq_items.add(x)]
    
-exercice
+Exercise
 --------
 
 list and count occurences of every 3mers in the following sequence ::
@@ -301,7 +341,7 @@ solution bonus ::
       print kmer, " = ", occurence   
       
       
-exercice
+Exercise
 --------
 
 given the following dict : ::
