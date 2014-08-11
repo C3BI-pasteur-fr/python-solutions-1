@@ -340,6 +340,26 @@ solution bonus ::
    for kmer, occurence in list_of_kmers:
       print kmer, " = ", occurence   
       
+  
+Exercise
+--------
+
+compute the reversed complement of the following sequence: ::
+
+   seq = 'acggcaacatggctggccagtgggctctgagaggagaaagtccagtggatgctcttggtctggttcgtgagcgcaacaca'
+
+   base_comp = { 'a' : 't', 
+                 'c' : 'g',
+                 'g' : 'c',
+                 't' : 'a'}
+   complement = ''
+   for base in seq:
+      complement += base_comp[base]
+
+   reverse_comp = complement[::-1]
+   print reverse_comp
+   tgtgttgcgctcacgaaccagaccaagagcatccactggactttctcctctcagagcccactggccagccatgttgccgt
+  
       
 Exercise
 --------
