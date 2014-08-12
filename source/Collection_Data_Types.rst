@@ -203,6 +203,16 @@ and the 2 dna fragments: ::
 
    dna_1 = dna_1.replace('\n', '')
    dans_2 = dna_2.replace('\n', '')
+
+algorithm 1 ::
+
+   enzymes = [ecor1, ecor5, bamh1, hind3, taq1, not1, sau3a1, hae3, sma1]
+   digest_1 = []
+   for enz in enzymes:
+      if enz.sequence in dna_1:
+         digest_1.append(enz)
+
+algorithm 2 we can determine the position of the site :: 
    
    enzymes = [ecor1, ecor5, bamh1, hind3, taq1, not1, sau3a1, hae3, sma1]
    digest_1 = []
@@ -211,54 +221,17 @@ and the 2 dna fragments: ::
       if pos != -1:
          digest_1.append(enz)
 
-with this first algorithm we find if an enzyme cut the dna but we cannot find all cuts in the dna for an enzyme.
-If we find a cutting site, we must search again starting at the first nucleotid after the begining of the match 
-until the end of the the dna, for this we use the start parameter of the find function, and so on. 
-As we don't know how many loop we need to scan the dna until the end we use a ``while`` loop testing for the presence of a cutting site.::  
 
+with these algorithms we find if an enzyme cut the dna but we cannot find all cuts in the dna for an enzyme. ::
+
+   enzymes = [ecor1, ecor5, bamh1, hind3, taq1, not1, sau3a1, hae3, sma1]
    digest_1 = []
    for enz in enzymes:
-      pos = dna_1.find(enz.sequence)
-      while pos != -1:
-         digest_1.append(enz)
-         pos = dna_1.find(enz.sequence, pos + 1)
-         
-   digest_2 = []
-   for enz in enzymes:
-      pos = dna_2.find(enz.sequence)
-      while pos != -1:
-         digest_2.append(enz)
-         pos = dna_2.find(enz.sequence, pos + 1)  
-                
-   cut_dna_1 = set(digest_1)
-   cut_dna_2 = set(digest_2)
-   cut_dna_1_not_dna_2 = cut_dna_1 - cut_dna_2
-         
-If we want also the position, for instance to compute the fragments of dna. ::
+      print enz.name, dna_1.count(enz.sequence)
 
-   digest_1 = []
-   for enz in enzymes:
-      pos = dna_1.find(enz.sequence)
-      while pos != -1:
-         digest_1.append((enz, pos))
-         pos = dna_1.find(enz.sequence, pos + 1)
-    
-   from operator import itemgetter
-   digest_1.sort(key=itemgetter(1))
-   [(e.name, d) for e, d in digest_1]
-   
-   digest_2 = []
-   for enz in enzymes:
-      pos = dna_2.find(enz.sequence)
-      while pos != -1:
-         digest_2.append((enz, pos))
-         pos = dna_2.find(enz.sequence, pos + 1)
-           
-   cut_dna_1 = set([e.name for e in digest_1])
-   cut_dna_2 = set([e.name for e in digest_2])
-   cut_dna_1_not_dna_2 = cut_dna_1 - cut_dna_2
-   
-   
+the latter algorithm display the number of occurence of each enzyme, But we cannot determine the position of every sites.
+We will see howt to do this later.
+
 
 
 Exercise
