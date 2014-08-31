@@ -38,9 +38,21 @@ The fibonacci suite can be defined as following:
       a = b
       b = new_number 
 
-We will see another way more elegant to implement the fibonacci suite in next chapter.
+We will see another way more elegant to implement the fibonacci suite in :ref:`Advance Programming Techniques` section.
 
+Exercise
+--------
 
+display the largest element in list (containing float or integer only)?::
+
+   l = [1,2,3,4,58,9]
+   for i in l:
+      highest = l[0]
+      if i > highest:
+         highest = i
+    print i
+      
+      
 Exercise
 --------
 
