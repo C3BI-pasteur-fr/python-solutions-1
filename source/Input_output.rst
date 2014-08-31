@@ -1,8 +1,8 @@
-.. _Variables:
+.. _Input_Output:
 
-************************************
-Variables, Expression and statements
-************************************
+****************
+Input and Output
+****************
 
 Exercises
 =========
