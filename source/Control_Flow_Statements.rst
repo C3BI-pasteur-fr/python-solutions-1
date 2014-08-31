@@ -5,6 +5,8 @@
 Control Flow Statements
 ***********************
 
+Exercises
+=========
 
 Exercise
 --------
@@ -22,21 +24,10 @@ The fibonacci suite can be defined as following:
 |    
 |    F\ :sub:`n` = F\ :sub:`n-1` + F\ :sub:`n-2` 
 
-
-::
-
-   #This program calculates the Fibonacci sequence
-   a = 0
-   b = 1
-   count = 0
-   max_count = 10
-   while count < max_count:
-      count = count + 1
-      print a,
-      new_number = a + b
-      #set new a and b for the next iteration
-      a = b
-      b = new_number 
+.. literalinclude:: _static/code/fibonacci_iteration.py
+   :linenos:
+   :language: python
+   
 
 We will see another way more elegant to implement the fibonacci suite in :ref:`Advance Programming Techniques` section.
 
@@ -52,7 +43,7 @@ display the largest element in list (containing float or integer only)?::
          highest = i
     print i
       
-      
+
 Exercise
 --------
 
@@ -82,19 +73,27 @@ and the 2 dna fragments: ::
    agcagcttaaatcggagagaattccatttactggccagggtaagagttttggtaaatatatagtgatatctggcttg"""
 
 | which enzymes cut the dna_1 get the name of the enzymes and all their positions of binding site?
-| do the same for dna_2
-| give the name of the enzymes that cut the dna_1 but not the dna_2?
+|                  the dna_2 ?
+|                  the dna_1 but not the dna_2?
+
 
 ::
 
    dna_1 = dna_1.replace('\n', '')
    dans_2 = dna_2.replace('\n', '')
-
-We looking for the first a cutting site, then we search again starting at the first nucleotid after the begining of the match 
-until the end of the the dna, for this we use the start parameter of the find function, and so on. 
-As we don't know how many loop we need to scan the dna until the end we use a ``while`` loop testing for the presence of a cutting site.::  
    
    enzymes = [ecor1, ecor5, bamh1, hind3, taq1, not1, sau3a1, hae3, sma1]
+   digest_1 = []
+   for enz in enzymes:
+      pos = dna_1.find(enz.sequence)
+      if pos != -1:
+         digest_1.append(enz)
+
+with this first algorithm we find if an enzyme cut the dna but we cannot find all cuts in the dna for an enzyme.
+If we find a cutting site, we must search again starting at the first nucleotid after the begining of the match 
+until the end of the the dna, for this we use the start parameter of the find function, and so on. 
+As we don't know how many loop we need to scan the dna until the end we use a ``while`` loop testing for the presence of a cutting site.::  
+
    digest_1 = []
    for enz in enzymes:
       pos = dna_1.find(enz.sequence)
@@ -113,6 +112,7 @@ As we don't know how many loop we need to scan the dna until the end we use a ``
    cut_dna_2 = set(digest_2)
    cut_dna_1_not_dna_2 = cut_dna_1 - cut_dna_2
          
+         
 but we want also the position, for instance to compute the fragments of dna. ::
 
    digest_1 = []
@@ -126,6 +126,7 @@ but we want also the position, for instance to compute the fragments of dna. ::
    from operator import itemgetter
    digest_1.sort(key=itemgetter(1))
    print [(e.name, pos) for e, pos in digest_1]
+
    
    digest_2 = []
    for enz in enzymes:
@@ -142,3 +143,27 @@ but we want also the position, for instance to compute the fragments of dna. ::
    
    cut_dna_1_not_dna_2 = cut_dna_1 - cut_dna_2
    
+
+Exercise
+--------
+
+From a list return a new list without any duplicate, but keeping the order of items. 
+For example: ::
+
+   >>> l = [5,2,3,2,2,3,5,1]
+   >>> uniqify_with_order(l)
+   >>> [5,2,3,1]  
+
+solution ::
+
+   >>> uniq = []
+   >>> for item in l:
+   >>>   if item not in uniq:
+   >>>      uniq.append(item)
+
+solution ::
+
+   >>> uniq_items = set()
+   >>> l_uniq = [x for x in l if x not in uniq_items and not uniq_items.add(x)]
+     
+ 

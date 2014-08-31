@@ -1,7 +1,3 @@
-.. sectnum:: 
-   :start: 4
-
-
 .. _Collection_Data_types:
 
 *********************
@@ -165,6 +161,7 @@ solution ::
 
    >>> list(set(l))
 
+<<<<<<< HEAD
                
 
 Exercise
@@ -249,12 +246,11 @@ solution ::
    >>> for item in l:
    >>>   if item not in uniq:
    >>>      uniq.append(item)
+=======
+              
+>>>>>>> 925831e40bd67e747a3aee7320d83c92e5b6fdc1
 
-solution ::
 
-   >>> uniq_items = set()
-   >>> l_uniq = [x for x in l if x not in uniq_items and not uniq_items.add(x)]
-   
 Exercise
 --------
 
