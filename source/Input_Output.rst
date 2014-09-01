@@ -91,4 +91,4 @@ query start, query end, subject start, subject end, Expect value, HSP bit score.
    :linenos:
    :language: python
 
-:download:`parse_blast_output.py <_static/code/parse_blast_output.txt>` .   
+:download:`parse_blast_output.py <_static/code/parse_blast_output.py>` .   
