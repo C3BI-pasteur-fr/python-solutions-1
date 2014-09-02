@@ -37,23 +37,35 @@ The sequence of the binding site must be cleaned up.
 Exercise
 --------
 
-write a function which take the path of a fasta file
+write a function which take the path of a fasta file (containing only one sequence) 
 and return a data structure of your choice that allow to stock 
 the id of the sequence and the sequence itself.
 
-:download:`seq.fasta <_static/data/seq.fasta>` .
+use the file :download:`seq.fasta <_static/data/seq.fasta>` to test your code.
 
-solution 1
-""""""""""
 .. literalinclude:: _static/code/fasta_reader.py
    :linenos:
    :language: python
 
 :download:`fasta_reader.py <_static/code/fasta_reader.py>` .   
 
-solution 2
-""""""""""
+Exercise
+--------
 
+Modify the code at the previous exercise to read multiple sequences fasta file.
+use the file :download:`abcd.fasta <_static/data/abcd.fasta>` to test your code.
+
+solution 1
+^^^^^^^^^^
+.. literalinclude:: _static/code/multiple_fasta_reader.py
+   :linenos:
+   :language: python
+
+:download:`fasta_iterator.py <_static/code/multiple_fasta_reader.py>` 
+
+
+solution 2
+^^^^^^^^^^
 .. literalinclude:: _static/code/fasta_iterator.py
    :linenos:
    :language: python
@@ -63,12 +75,33 @@ solution 2
    
 The second version  is an iterator. Thus it retrun sequence by sequence the advantage of this version. 
 If the file contains lot of sequences you have not to load all the file in memory.
-You can call this function and put in in a loop or call next. work with the sequence and pass to the next sequence on so on.
+You can call this function and put in in a loop or call next. 
+Work with the sequence and pass to the next sequence on so on.
 for instance : ::
    
    for seq in fasta_iter('my_fast_file.fasta'):
       print seq
     
+
+Exercise
+--------
+
+Read a multiple sequence file in fasta format and write to a new file, one sequence by file,
+only sequences starting with methionine and containing at least six tryptophanes (W).
+ 
+(*you should create files for sequences: ABCD1_HUMAN, ABCD1_MOUSE, ABCD2_HUMAN, ABCD2_MOUSE, ABCD2_RAT, ABCD4_HUMAN, ABCD4_MOUSE*)
+
+bonus
+^^^^^
+
+Write sequences with 80 aa/line
+
+.. literalinclude:: _static/code/fasta_filter.py
+   :linenos:
+   :language: python
+
+:download:`fasta_iterator.py <_static/code/fasta_filter.py>` .
+
 Exercise
 --------
 
@@ -87,8 +120,8 @@ query start, query end, subject start, subject end, Expect value, HSP bit score.
 
 (adapted from *managing your biological data with python* p138) ::
 
-.. literalinclude:: _static/code/parse_blast_output.py
+.. literalinclude:: _static/code/parse_blast.py
    :linenos:
    :language: python
 
-:download:`parse_blast_output.py <_static/code/parse_blast_output.py>` .   
+:download:`parse_blast.py <_static/code/parse_blast.py>` .   
