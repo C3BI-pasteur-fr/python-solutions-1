@@ -246,9 +246,6 @@ solution ::
    >>> for item in l:
    >>>   if item not in uniq:
    >>>      uniq.append(item)
-=======
-              
->>>>>>> 925831e40bd67e747a3aee7320d83c92e5b6fdc1
 
 
 Exercise
