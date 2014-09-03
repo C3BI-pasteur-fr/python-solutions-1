@@ -161,8 +161,6 @@ solution ::
 
    >>> list(set(l))
 
-<<<<<<< HEAD
-               
 
 Exercise
 --------
