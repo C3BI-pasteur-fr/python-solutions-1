@@ -351,3 +351,37 @@ solution ::
 solution ::
 
    inverted_d = {v : k for k, v in d.items()}
+   
+Exercise
+--------
+
+We assume that we have a phylogenic tree of mammals represented as nested lists. ::
+    
+   mammals = ['Bovine', ['Gibbon', ['Orang Utan', ['Gorilla', ['Chimp', 'Human']]]], 'Mouse' ]
+   
+We want to work on the subtree of apes (Gibbon, Orang Utan, Gorilla, Chimp, Human) 
+
+* extract the this subtree in a new tree
+* then insert 'Bonobo' at the same level of Chimp we want to obtanin something like this :[chimp, bonobo], Human]
+   
+what's append on mammals? explain the result. ::
+
+   import copy
+     
+   mammals = ['Bovine', ['Gibbon', ['Orang Utan', ['Gorilla', ['Chimp', 'Human']]]], 'Mouse' ]
+   apes = copy.copy(mammals[1])
+   apes [1][1][1] = [['Chimp', 'Bonobo'], 'Human']
+   print mammals
+   ['Bovine', ['Gibbon', ['Orang Utan', ['Gorilla', ['Chimp', 'Human']]]], 'Mouse' ]
+
+what we should do to work with apes without modify mammals?
+   
+when we extract apes form mammals we did a shallow copy of mammals. tha mean we create a new list but each item in mammals 
+are not copy. when we modify apes we mutate an element of apes which was also referenced in mammals so mammals is modified to.
+This is what we call a side effect. To avoid that we should use deepcopy from module copy.
+to create apes we should write: ::
+
+   apes = copy.deepcopy(mammals[1]) 
+   
+deepcopy not only copy the list but make also a copy of each items of list recursively.
+ 
