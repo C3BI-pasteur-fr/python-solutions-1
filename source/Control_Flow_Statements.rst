@@ -37,11 +37,11 @@ Exercise
 display the largest element in list (containing float or integer only)?::
 
    l = [1,2,3,4,58,9]
+   higest = l[0]
    for i in l:
-      highest = l[0]
       if i > highest:
          highest = i
-    print i
+    print highest
       
 
 Exercise
