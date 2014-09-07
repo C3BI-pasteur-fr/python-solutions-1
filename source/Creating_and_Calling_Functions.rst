@@ -7,12 +7,440 @@ Creating and Calling Functions
 Exercises
 =========
 
+Exercise
+--------
+
+Without executing the code in Python interpreter, can you determine what the code below print out. 
+help you by drawing diagram.
+
+**Hint** locals print a dictionnary with local variable as keys and theire respectives values.
+
+.. figure:: _static/figs/cf_exo_1.png
+    :width: 400px
+    :figclass: align-left
+
+.. code-block:: python
+
+   x = 4 
+   
+   def func():
+      y  = 5
+      print locals()
+    
+   >>> func()
+   {'y': 5}
+   >>> print x
+   4
+
+.. container:: clearer
+
+   .. image :: _static/figs/spacer.png   
+       
+Exercise
+--------
+
+   
+Without executing the code in Python interpreter, can you determine what the code below print out. 
+help you by drawing diagram.
+
+**Hint** locals print a dictionnary with local variable as keys and theire respectives values.
+
+.. figure:: _static/figs/cf_exo_2.png
+    :width: 400px
+    :figclass: align-left
+
+.. code-block:: python
+
+   x = 4 
+   
+   def func():
+      y = 5 
+      x = 8
+      print locals()
+      x = x + 2
+   
+   >>> y = func()
+   {'y': 5, 'x': 8}
+   >>> 
+   >>> print y
+   None
+   >>> print x
+   4
+
+.. container:: clearer
+
+   .. image :: _static/figs/spacer.png   
+    
+       
+Exercise
+--------
+
+Without executing the code in Python interpreter, can you determine what the code below print out. 
+help you by drawing diagram.
+
+**Hint** locals print a dictionnary with local variable as keys and theire respectives values.
+
+.. figure:: _static/figs/cf_exo_3.png
+    :width: 400px
+    :figclass: align-left
+
+.. code-block:: python
+
+   x = 4
+   
+   def func(a):
+      y = x + 2 
+      print locals()
+      x = y
+      return y
+       
+   >>> y = func(x)
+   {'y': 6, 'a': 4}  
+   >>> 
+   >>> print y
+   6
+   >>> print y == x
+   False
+
+.. container:: clearer
+
+   .. image :: _static/figs/spacer.png   
+    
+
+Exercise
+--------
+
+Without executing the code in Python interpreter, can you determine what the code below print out. 
+help you by drawing diagram.
+
+**Hint** locals print a dictionnary with local variable as keys and theire respectives values.
+
+.. figure:: _static/figs/cf_exo_4.png
+    :width: 400px
+    :figclass: align-left
+
+.. code-block:: python
+
+   x = 4
+   
+   def func(a):
+      x = x + 2 
+      print locals()
+      return x
+       
+   y = func(x)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "<stdin>", line 2, in func
+   UnboundLocalError: local variable 'x' referenced before assignment
+   
+   print y
+   print y == x     
+
+.. container:: clearer
+
+   .. image :: _static/figs/spacer.png   
+    
 
 Exercice
 --------
 
-Use the code of the exetrcise 4.5.7 on the kmer. Make a function which compute all kmer of a given lenght
-in a sequence.
+Without executing the code in Python interpreter, can you determine what the code below print out. 
+help you by drawing diagram.
+
+.. figure:: _static/figs/cf_exo_5.png
+    :width: 400px
+    :figclass: align-left
+
+.. code-block:: python
+
+   x = 4
+   
+   def func(x):
+      x = x + 2 
+      return x
+       
+   y = func(x)
+
+   >>> print x
+   4
+   >>> print y == x
+   False
+   
+.. container:: clearer
+
+   .. image :: _static/figs/spacer.png   
+    
+    
+Exercice
+--------
+
+Without executing the code in Python interpreter, can you determine what the code below print out. 
+help you by drawing diagram.
+
+.. figure:: _static/figs/cf_exo_6.png
+    :width: 400px
+    :figclass: align-left
+
+.. code-block:: python
+
+   def func():
+      y = x
+      return y
+    
+   >>> x = 4
+   >>> z = func()
+   >>> 
+   >>> print x
+   4
+   >>> print z
+   4
+   >>> print id(z) == id(x)
+   True
+
+.. container:: clearer
+
+   .. image :: _static/figs/spacer.png   
+       
+Exercice
+--------
+
+Without executing the code in Python interpreter, can you determine what the code below print out. 
+help you by drawing diagram.
+
+.. figure:: _static/figs/cf_exo_7.png
+    :width: 400px
+    :figclass: align-left
+
+.. code-block:: python
+
+   x = 4
+   
+   def func(x = 5):
+      x = x + 2 
+      return x
+       
+   >>> y = func(x)
+   >>> 
+   >>> print x
+   4
+   >>> print y
+   6
+
+.. container:: clearer
+
+   .. image :: _static/figs/spacer.png   
+    
+Exercice
+--------
+
+Without executing the code in Python interpreter, can you determine what the code below print out. 
+help you by drawing diagram.
+
+**Hint** locals print a dictionnary with local variable as keys and theire respectives values.
+
+.. figure:: _static/figs/cf_exo_8.png
+    :width: 400px
+    :figclass: align-left
+
+.. code-block:: python
+
+   x = 4
+   
+   def func(a):
+      global x
+      def func2():
+         print locals()
+         y = x + 4
+         return y
+      z = func2()
+      return z
+       
+   y = func(x)
+   {}
+   >>> print x
+   4
+   >>> print y
+   8
+
+.. container:: clearer
+
+   .. image :: _static/figs/spacer.png   
+    
+Exercice
+--------
+
+Without executing the code in Python interpreter, can you determine what the code below print out. 
+help you by drawing diagram.
+
+.. figure:: _static/figs/cf_exo_9.png
+    :width: 400px
+    :figclass: align-left
+
+.. code-block:: python
+
+   x = {'a' : 4}
+   
+   def func(a):
+      a['b'] = 5 
+      return a
+       
+   y = func(x)
+   
+   >>> print x
+   {'a': 4, 'b': 5}
+   >>> print y
+   {'a': 4, 'b': 5}
+   >>> print x is y
+   True
+   
+.. container:: clearer
+
+   .. image :: _static/figs/spacer.png   
+    
+Exercice
+--------
+
+Without executing the code in Python interpreter, can you determine what the code below print out. 
+help you by drawing diagram.
+
+.. figure:: _static/figs/cf_exo_10.png
+    :width: 400px
+    :figclass: align-left
+
+.. code-block:: python
+
+   x = {'a' : 4}
+   
+   def func(a):
+      a['b'] = 5 
+       
+   y = func(x)
+   
+   >>> print x
+   {'a': 4, 'b': 5}
+   >>> print y
+   None
+   
+.. container:: clearer
+
+   .. image :: _static/figs/spacer.png   
+    
+    
+Exercice
+--------
+
+Without executing the code in Python interpreter, can you determine what the code below print out. 
+help you by drawing diagram.
+
+.. figure:: _static/figs/cf_exo_11.png
+    :width: 400px
+    :figclass: align-left
+
+.. code-block:: python
+
+   x = {'a' : 4}
+   
+   def func(a):
+      x['b'] = 5
+      def func2():
+         a['b'] = 6 
+      return a
+       
+   y = func(x)
+   
+   print x
+   {'a': 4, 'b': 5}
+   print y
+   {'a': 4, 'b': 5}
+   
+| *a* refer to same object as *x*
+| in func *x* does not exist, so *x* refer to global variable *x*
+| we mutate *x*
+| *func2* is never executed
+| we return *a* so the same object refered by *x*
+| so *y* refer also the same object as *x*
+
+.. container:: clearer
+
+   .. image :: _static/figs/spacer.png   
+    
+    
+Exercice
+--------
+
+Without executing the code in Python interpreter, can you determine what the code below print out. 
+help you by drawing diagram.
+
+.. figure:: _static/figs/cf_exo_12.png
+    :width: 400px
+    :figclass: align-left
+
+.. code-block:: python
+
+   x = {'a' : 4}
+   
+   def func(a):
+      x['b'] = 5
+      def func2():
+         a['b'] = 6 
+      func2()
+      return a
+       
+   y = func(x)
+   
+   print x
+   {'a': 4, 'b': 6}
+
+| in this code *func2* is executed
+| *a* is not in *func2* namesapce so python find it in enclosing namespace *func*
+| *a* refer the same object as *x*
+
+.. container:: clearer
+
+   .. image :: _static/figs/spacer.png   
+    
+      
+Exercice
+--------
+
+Without executing the code in Python interpreter, can you determine what the code below print out. 
+help you by drawing diagram.
+
+.. figure:: _static/figs/cf_exo_13.png
+    :width: 400px
+    :figclass: align-left
+
+.. code-block:: python
+
+   x = {'a' : 4}
+   
+   def func(a):
+      x['b'] = 5
+      def func2(x):
+         x['b'] = 6 
+      func2(a.copy())
+      return a
+       
+   y = func(x)
+   
+   print x
+   {'a': 4, 'b': 5}
+   
+| in this code *x* a variable x is defined localy in *func2* and hide the global variable x
+| this local *x* refer to a shalow copy of the *func* local variable *a* which refer to the same object as global variable *x*
+| so func2 does not do a side effect on dictionnary referd by *x* as in previous example. 
+
+.. container:: clearer
+
+   .. image :: _static/figs/spacer.png   
+       
+      
+Exercice
+--------
+
+Use the code of the exetrcise 4.5.7 on the kmer. 
+Make a function which compute all kmer of a given lenght in a sequence.
 
 .. literalinclude:: _static/code/kmer.py
    :linenos:
@@ -55,44 +483,4 @@ This function have to take the phase as parameter
 
 :download:`translate.py <_static/code/translate.py>` .  
 
-Exercise
---------
-
-Implement a matrix and functions to handle it.
-choose the data structure of your choice.
-The API (**A**\ pplication **P**\ rogramming **I**\ nterface) to implemet is the following:
-
-         
-.. literalinclude:: _static/code/matrix.py
-   :linenos:
-   :language: python
-
-:download:`matrix.py <_static/code/matrix.py>` .  
-
-Exercise
---------
-
-Write a program that calculates the similarity of 2 RNA sequences.
-
-* To compute the simalirity you need to parse a file containing the similarity matrix.
-* The similarity of the 2 sequences is the sum of base similarities. 
-  so you have to compare the first base of to sequence and use the matrix to get the similarity
-  from the similarity table, on so on for all bases then sum these similarities.
-  
-.. note::
-   as we  don't yet see how to read a file, we provide a list of strings that represents the file
-   as we can get them if we read that file.
-   
-::
-
-   lines = iter(['  A G C U\n'
-                 'A 1.0 0.5 0.0 0.0\n',
-                 'G 0.5 1.0 0.0 0.0\n',
-                 'C 0.0 0.0 1.0 0.5\n',
-                 'U 0.0 0.0 0.5 1.0\n'])
-
-.. literalinclude:: _static/code/similarity.py
-   :linenos:
-   :language: python
-
-:download:`similarity.py <_static/code/similarity.py>` .            
+    
