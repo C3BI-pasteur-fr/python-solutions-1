@@ -3,7 +3,7 @@ from itertools import groupby
    
 Sequence =  namedtuple("Sequence", "id comment sequence")
 
-def fasta_iter(fasta_path):
+def fasta_iter(fasta_file):
    """
    :param fasta_file: the file containing all input sequences in fasta format.
    :type fasta_file: file object
@@ -31,3 +31,8 @@ def fasta_iter(fasta_path):
 #or
 # for seq in fasta_iter('seq.fasta'):
 #   do something with seq
+#The problem with this implementation is
+# something goes wrong in do something with seq
+# but we don't quit the program (we catch the exception for instance)
+# the fasta file is still open
+# it's better to put the fasta file opening out the fasta reader see fasta filter 

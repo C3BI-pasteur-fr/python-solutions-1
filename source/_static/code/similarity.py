@@ -1,4 +1,4 @@
-from matrix import *
+import matrix
 
 lines = iter( ['  A G C U\n',
                'A 1.0 0.5 0.0 0.0\n',
@@ -11,14 +11,14 @@ def parse_similarity_file():
     """
     parse file containing RNA similarity matrix and return a matrix
     """
-    sim_matrix = matrix_maker(4, 4)
+    sim_matrix = matrix.create(4, 4)
     #skip first line
     lines.next()
     for row_no, line in enumerate(lines):
         line = line.strip()
         fields = line.split()
         values = [float(val) for val in fields[1:]]
-        matrix_replace_row(sim_matrix, row_no, values)
+        matrix.replace_row(sim_matrix, row_no, values)
     return sim_matrix
 
 def get_similarity(b1, b2, sim_matrix):
@@ -39,7 +39,7 @@ def get_similarity(b1, b2, sim_matrix):
         raise KeyError("unknown base b1: " + str(b1))
     if not b2 in bases:
         raise KeyError("unknown base b2: " + str(b2))
-    return matrix_get_cell(sim_matrix, bases[b1], bases[b2])
+    return matrix.get_cell(sim_matrix, bases[b1], bases[b2])
                            
 def compute_similarity(seq1, seq2, sim_matrix):
     """
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     seq1 = 'AGCAUCUA'
     seq2 = 'ACCGUUCU'
     sim_matrix = parse_similarity_file()
-    print matrix_to_str(sim_matrix)
+    print matrix.to_str(sim_matrix)
     similarity = compute_similarity(seq1, seq2, sim_matrix)
     print similarity
             

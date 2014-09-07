@@ -21,4 +21,4 @@ def fasta_reader(fasta_path):
                 in_sequence = True
             else:
                 sequence += line.strip()
-        return Sequence(id_ , comment, sequence)
+    return Sequence(id_ , comment, sequence)
