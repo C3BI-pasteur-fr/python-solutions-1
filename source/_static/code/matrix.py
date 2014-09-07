@@ -3,7 +3,7 @@ Implementation of simple matrix
 """
 
 
-def matrix_maker(row_num, col_num, val = None):
+def create(row_num, col_num, val = None):
 	"""
 	:param row_num: the number of rows
 	:type row_num: int
@@ -21,7 +21,7 @@ def matrix_maker(row_num, col_num, val = None):
 	return matrix
 
 
-def _check_matrix_index(matrix, row_no, col_no):
+def _check_index(matrix, row_no, col_no):
 	"""
 	check if row_no and col_no are in matrix bound
 	
@@ -33,12 +33,12 @@ def _check_matrix_index(matrix, row_no, col_no):
 	:type col_no: int
 	:raise: IndexError if row_no or col_no are out of matrix bounds
 	""" 
-	row_max, col_max = matrix_size(matrix)
+	row_max, col_max = size(matrix)
 	if (row_no < 0 or row_no >= row_max) or (col_no < 0 or col_no >= col_max):
 		raise IndexError("matrix index out of range")
 	
 	
-def matrix_size(matrix):
+def size(matrix):
 	"""
 	:param matrix: the matrix to compute the size
 	:type matrix: matrix
@@ -48,7 +48,7 @@ def matrix_size(matrix):
 	return len(matrix[0]), len(matrix)
 
 
-def matrix_get_cell(matrix, row_no, col_no):
+def get_cell(matrix, row_no, col_no):
 	"""
 	:param matrix: the matrix 
 	:type matrix: matrix
@@ -59,11 +59,11 @@ def matrix_get_cell(matrix, row_no, col_no):
 	:retrun: the content of cell corresponding to row_no x col_no
 	:rtype: any
 	"""
-	_check_matrix_index(matrix, row_no, col_no)
+	_check_index(matrix, row_no, col_no)
 	return matrix[col_no][row_no]
 
 
-def matrix_set_cell(matrix, row_no, col_no, val):
+def set_cell(matrix, row_no, col_no, val):
 	"""
 	set the value val in cell specified by row_no x col_no
 	
@@ -76,11 +76,11 @@ def matrix_set_cell(matrix, row_no, col_no, val):
 	:param val: the value to set in cell 
 	:type val: int
 	"""
-	_check_matrix_index(matrix, row_no, col_no)
+	_check_index(matrix, row_no, col_no)
 	matrix[col_no][row_no] = val
 
 
-def matrix_to_str(matrix):
+def to_str(matrix):
 	"""
 	:param matrix: the matrix to compute the size
 	:type matrix: matrix
@@ -95,7 +95,7 @@ def matrix_to_str(matrix):
 	return s
 
 
-def matrix_mult(matrix, val):
+def mult(matrix, val):
 	"""
 	:param matrix: the matrix to compute the size
 	:type matrix: matrix
@@ -115,7 +115,7 @@ def matrix_mult(matrix, val):
 	return new_matrix
 
 
-def matrix_get_row(matrix, row_no):
+def get_row(matrix, row_no):
 	"""
 	:param matrix: the matrix to compute the size
 	:type matrix: matrix
@@ -125,15 +125,15 @@ def matrix_get_row(matrix, row_no):
 	         a shallow copy of the row
 	:rtype: list
 	"""
-	_check_matrix_index(matrix, row_no, 0)
-	row_max, col_max = matrix_size(matrix)
+	_check_index(matrix, row_no, 0)
+	row_max, col_max = size(matrix)
 	row = []
 	for col_n in range(col_max):
-		row.append(matrix_get_cell(matrix, row_no, col_n))
+		row.append(get_cell(matrix, row_no, col_n))
 	return row
 	
 	
-def matrix_set_row(matrix, row_no, val):
+def set_row(matrix, row_no, val):
 	"""
 	set all cells of row row_no with val
 	
@@ -144,13 +144,13 @@ def matrix_set_row(matrix, row_no, val):
 	:param val: the value to put in cells
 	:type val: any
 	"""
-	_check_matrix_index(matrix, row_no, 0)
-	row_max, col_max = matrix_size(matrix)
+	_check_index(matrix, row_no, 0)
+	row_max, col_max = size(matrix)
 	for col_n in range(col_max):
-		matrix_set_cell(matrix, row_no, col_n, val)
+		set_cell(matrix, row_no, col_n, val)
 
 
-def matrix_get_col(matrix, col_no):
+def get_col(matrix, col_no):
 	"""
 	:param matrix: the matrix get row
 	:type matrix: matrix
@@ -160,12 +160,12 @@ def matrix_get_col(matrix, col_no):
 	         a shallow copy of the col
 	:rtype: list
 	"""
-	_check_matrix_index(matrix, 0, col_no)
+	_check_index(matrix, 0, col_no)
 	col = matrix[col_no][:]
 	return col
 	
 	
-def matrix_set_col(matrix, col_no, val):
+def set_col(matrix, col_no, val):
 	"""
 	set all cells of col col_no with val
 	
@@ -176,13 +176,13 @@ def matrix_set_col(matrix, col_no, val):
 	:param val: the value to put in cells
 	:type val: any
 	"""
-	_check_matrix_index(matrix, 0, col_no)
-	row_max, col_max = matrix_size(matrix)
+	_check_index(matrix, 0, col_no)
+	row_max, col_max = size(matrix)
 	for row_n in range(im):
-		matrix_set_cell(matrix, row_n, col_no, val)
+		set_cell(matrix, row_n, col_no, val)
 
 
-def matrix_replace_col(matrix, col_no, col):
+def replace_col(matrix, col_no, col):
 	"""
 	replace column col_no with col
 	
@@ -193,16 +193,16 @@ def matrix_replace_col(matrix, col_no, col):
 	:param col: the list of values to use as replacement of column 
 	:type col: list
 	"""
-	row_max, col_max = matrix_size(matrix)
+	row_max, col_max = size(matrix)
 	if len(col) != col_max:
 		raise RuntimeError("the size of col {0} does not fit to matrix size {1}x{2}".format(len(col),
 																						row_max,
 																						col_max))
-	_check_matrix_index(matrix, 0, col_no)
+	_check_index(matrix, 0, col_no)
 	matrix[col_no] = col
 
 
-def matrix_replace_row(matrix, row_no, row):
+def replace_row(matrix, row_no, row):
 	"""
 	replace row row_no with row
 	
@@ -213,25 +213,25 @@ def matrix_replace_row(matrix, row_no, row):
 	:param row: the list of value to use as replacement of row 
 	:type row: list
 	"""
-	row_max, col_max = matrix_size(matrix)
+	row_max, col_max = size(matrix)
 	if len(row) != row_max:
 		raise RuntimeError("the size of row {0} does not fit to matrix size {1}x{2}".format(len(row),
 																						row_max,
 																						col_max))
-	_check_matrix_index(matrix, row_no, 0)
+	_check_index(matrix, row_no, 0)
 	for col_no, value in enumerate(row):
-		matrix_set_cell(matrix, row_no, col_no, value)
+		set_cell(matrix, row_no, col_no, value)
 
 		
 	
 if __name__ == '__main__':
-	m = matrix_maker(5, 3)
+	m = create(5, 3)
 	print m
-	matrix_set_cell(m,0, 0, 1)
-	matrix_set_cell(m,0, 2, 2)
-	matrix_set_cell(m,4, 0, 12)
-	matrix_set_cell(m,4, 2, 15)
-	print matrix_to_str(m)
-	print "get row 0",  matrix_get_row(m, 0)
-	print "get col 0", matrix_get_col(m, 0)
+	set_cell(m,0, 0, 1)
+	set_cell(m,0, 2, 2)
+	set_cell(m,4, 0, 12)
+	set_cell(m,4, 2, 15)
+	print to_str(m)
+	print "get row 0",  get_row(m, 0)
+	print "get col 0", get_col(m, 0)
 	
