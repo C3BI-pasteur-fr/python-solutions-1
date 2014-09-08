@@ -32,7 +32,13 @@ Write a function which take the path of a file in rebase format
 and return in a dictionnary the collection of the enzyme contains in the file.
 The sequence of the binding site must be cleaned up.
 
-:download:`rebase_light.txt <_static/data/rebase_light.txt>` .
+use the file :download:`rebase_light.txt <_static/data/rebase_light.txt>` to test your code.
+
+.. literalinclude:: _static/code/rebase.py
+   :linenos:
+   :language: python
+
+:download:`rebase.py <_static/code/rebase.py>` .
  
 Exercise
 --------
@@ -61,10 +67,17 @@ solution 1
    :linenos:
    :language: python
 
-:download:`fasta_iterator.py <_static/code/multiple_fasta_reader.py>` 
-
+:download:`multiple_fasta_reader.py <_static/code/multiple_fasta_reader.py>` 
 
 solution 2
+^^^^^^^^^^
+.. literalinclude:: _static/code/multiple_fasta_reader2.py
+   :linenos:
+   :language: python
+
+:download:`multiple_fasta_reader2.py <_static/code/multiple_fasta_reader2.py>` 
+
+solution 3
 ^^^^^^^^^^
 .. literalinclude:: _static/code/fasta_iterator.py
    :linenos:
@@ -72,12 +85,25 @@ solution 2
 
 :download:`fasta_iterator.py <_static/code/fasta_iterator.py>` .   
    
-   
-The second version  is an iterator. Thus it retrun sequence by sequence the advantage of this version. 
-If the file contains lot of sequences you have not to load all the file in memory.
+With the first version, we have to load all sequences before to treat them.
+if the file is huge (>G0) it can be a problem.
+
+The third version allow to red sequences one by one.
+To do that we have to open the file outside the reader function
+The fasta format is very convenient for human but not for parser.
+The end of a sequence is indicated by the end of file or the begining of a new one.
+So with this version we have play with the cursor to place the cursor backward
+when we encouter a new sequence. then the cursor is placed at the right place 
+for the next sequence.
+
+    
+The third version  is an iterator and use generator. 
+generators are functions which keep a state between to calls.
+generators does not use return to return a value but the keyword yield.
+Thus this implementation retrun sequence by sequence without to play with the cursor.
 You can call this function and put in in a loop or call next. 
 Work with the sequence and pass to the next sequence on so on.
-for instance : ::
+for instance which is a very convenient way to use it: ::
    
    for seq in fasta_iter('my_fast_file.fasta'):
       print seq
