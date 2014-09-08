@@ -93,14 +93,20 @@ help you by drawing diagram.
       print locals()
       x = y
       return y
-       
-   >>> y = func(x)
-   {'y': 6, 'a': 4}  
-   >>> 
-   >>> print y
-   6
-   >>> print y == x
-   False
+      
+   >>> y = func(x)    
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "<stdin>", line 2, in func
+   UnboundLocalError: local variable 'x' referenced before assignment  
+
+Unlike what we might think in *y = x + 2* *x* is not get from the global scope.
+As soon as you make an assignment to a variable in a scope, 
+that variable becomes local to that scope and shadows any similarly named variable in the outer scope.
+even if the assignment appear later in code.
+Here *x = y* make *x* as local variable whatever you are in func.
+so at line  *y = x + 2* we try to use the loca variable *x* but we have to asign it a value (it is done later) so
+Python raise an UnboundLocalError (`see python faq for details <https://docs.python.org/3/faq/programming.html#why-am-i-getting-an-unboundlocalerror-when-the-variable-has-a-value>`_) 
 
 .. container:: clearer
 
