@@ -272,7 +272,10 @@ solution ::
 
    s = s.replace('\n', '')
    kmers = {}
-   for i in range(len(s) - 3):
+   # range exclude the last value range(3) -> 0, 1 ,2
+   # so we nned to go to len(s) minus trimer + 1 to include the 
+   # last base 
+   for i in range(len(s) - 3 +1):
       kmer = s[i:i+3]
       kmers[kmer] = kmers.get(kmer, 0) + 1
 
@@ -285,7 +288,7 @@ we can use also a defaultdict: ::
    
    s = s.replace('\n', '')
    kmers = collection.defaultdict(int)
-   for i in range(len(s) - 3):
+   for i in range(len(s) - 2):
       kmer = s[i:i+3]
       kmers[kmer] += 1
 
