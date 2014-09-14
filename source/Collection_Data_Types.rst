@@ -327,6 +327,33 @@ compute the reversed complement of the following sequence: ::
    print reverse_comp
    tgtgttgcgctcacgaaccagaccaagagcatccactggactttctcctctcagagcccactggccagccatgttgccgt
   
+other solution
+""""""""""""""
+
+python provide an interresting method for our problem. 
+The ``translate`` method work on string and need a parameter which is a object
+that can do the correspondance between characters in old string a the new one.
+``maketrans`` is a function in module ``string`` that allow us to build this object.
+``maketrans`` take 2 arguments, two strings, the first string contains the characters
+to change, the second string the corresponding characters in the new string.
+Thus the two strings **must** have the same lenght. The correspondance between
+the characters to change and their new values is made in funtion of thier position.
+the first character of the first string will be replaced by the first character of the second string,
+the second character of the first string will be replaced by the second character of the second string, on so on.   
+So we can write the reverse complement without loop.
+
+::
+
+   from string import maketrans
+
+   #first we reverse the sequence
+   rev_comp = seq[::-1]
+   #then we complement it
+   nucleotide = 'ATCG'
+   complement = 'TAGC'
+   rosetta_stone = maketrans(nucleotide, complement)
+   rev_comp = rev_comp.translate(rosetta_stone)
+
       
 Exercise
 --------
