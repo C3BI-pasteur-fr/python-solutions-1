@@ -18,7 +18,6 @@ def fasta_reader(fasta_path):
                 header = line.split()
                 id_ = header[0]
                 comment = ' '.join(header[1:])
-                in_sequence = True
             else:
                 sequence += line.strip()
     return Sequence(id_ , comment, sequence)
