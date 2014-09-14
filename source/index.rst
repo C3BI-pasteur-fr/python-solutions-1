@@ -21,7 +21,7 @@ Contents:
    Creating_and_Calling_Functions
    Modules_and_Packages
    Input_Output
-   Scripting
+   
    
 Indices and tables
 ==================
