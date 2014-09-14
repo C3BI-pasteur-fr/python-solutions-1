@@ -144,7 +144,7 @@ query start, query end, subject start, subject end, Expect value, HSP bit score.
 | sort the hits by their *percent identity* in the descending order.
 | write the results in a new file.
 
-(adapted from *managing your biological data with python* p138) ::
+(adapted from *managing your biological data with python* p138) 
 
 .. literalinclude:: _static/code/parse_blast.py
    :linenos:
