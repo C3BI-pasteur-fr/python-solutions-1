@@ -17,12 +17,12 @@ Assume that we execute the following assignment statements: ::
    delimiter ='.'
 
 For each of the following expressions, write the value of the expression and the type (of the value of
-the expression) and explain. ::
+the expression) and explain. 
 
-   1. width / 2
-   2. width / 2.0
-   3. height / 3
-   4. 1 + 2 * 5
+ #. width / 2
+ #. width / 2.0
+ #. height / 3
+ #. 1 + 2 * 5
    
 Use the Python interpreter to check your answers. ::
 
@@ -59,19 +59,34 @@ Use the Python interpreter to check your answers. ::
 Exercise
 --------
 
-Practice using the Python interpreter as a calculator:
+Write a function which take a radius as input and return the volume of a sphere:
 
-| The volume of a sphere with radius r is 4/3 πr\ :sup:`3`. What is the volume of a sphere with radius 5?
-| Hint: π is in math module, so to access it you need to import the math module ::
-   
-      >>> import math
-      >>> math.pi
-   
- Hint: 392.7 is wrong! ::
-   
-      >>> import math 
-      >>> float(4)/float(3) * float(math.pi) * pow(5, 3)
+The volume of a sphere with radius r is 4/3 πr\ :sup:`3`. 
+
+What is the volume of a sphere with radius 5?
+
+**Hint**: π is in math module, so to access it you need to import the math module 
+Place the ``import`` statement at the top fo your file.
+after that, you can use ``math.pi`` everywhere in the file like this::
       
+      >>> import math
+      >>>
+      >>> #do what you need to do
+      >>> math.pi #use math.pi
+   
+**Hint**: the volume of a spher with radius 5 is **not** 392.7 !
+   
+.. literalinclude:: _static/code/vol_of_sphere.py
+   :linenos:
+   :language: python
+
+::
+
+   python -i volume_of_sphere.py 
+   >>> vol_of_sphere(5)
+   523.5987755982989
+   
+:download:`vol_of_sphere.py <_static/code/vol_of_sphere.py>` .      
 
 Exercise
 --------
@@ -173,14 +188,35 @@ how long is the sv40 in bp?
 Hint : the fasta header is 61bp long.
 (http://www.ncbi.nlm.nih.gov/nuccore/J02400.1)
 
-::
+pseudocode
+
+write a function ``fasta_to_one_line`` that return a sequence as a string
+without header or any non sequence characters
+
+pseudocode:
+
+|   *fasta_to_one_line(seq)*
+|      *header_end_at <- find the first return line character*
+|      *raw_seq <- remove header from sequence*
+|      *raw_seq <- remove non sequence chars*
+|      *return raw_seq*
+
+
+.. literalinclude:: _static/code/fasta_to_one_line.py
+   :linenos:
+   :language: python
+
    
-   >>> # remove the header
-   >>> sv40_sequence = sv40[61:]
-   >>> # remove the carriagge return character \n
-   >>> sv40_sequence = sv40_sequence.replace('\n' , '')
-   >>> # then compute the lenght 
-   >>> len(sv40_sequence)
+:download:`fasta_to_one_line.py <_static/code/fasta_to_one_line.py>` . 
+
+::
+
+   python
+   >>> import sv40
+   >>> import fasta_to_one_line
+   >>>
+   >>> sv40seq = fasta_to_one_line(sv40) 
+   >>> print len(sv40_sequence)
    5243
 
 Is that the following enzymes: 
@@ -188,7 +224,8 @@ Is that the following enzymes:
 * EcorI (gaattc), 
 * HindIII (aagctt), 
 * SmaI (cccggg) 
-have recogition sites in sv40? ::
+
+have recogition sites in sv40 (just answer by True or False)? ::
 
    >>> "ggatcc".upper() in sv40_sequence
    True
@@ -225,25 +262,41 @@ Exercise
 --------
 
 We want to perform a PCR on sv40, can you give the length and the sequence of the amplicon?
-to simplify the 2 primers are given in 5'3' 
-| CGGGACTATGGTTGCTGACT
-| TCTTTCCGCCTCAGAAGGTA
-(write the peudocode before coding)
 
-| find the position of the first primer in sv40
-| find the position of the 2nd primer in sv40
-| # the position of primer are position of the begining of the primer
-| lenght of amplicon = position 2nd primer + len(2nd primer) - position 1rst primer  
+Write a function which have 3 parameters ``sequence``, ``primer_1`` and ``primer_2``
+
+* *We consider only the cases where primer_1 and primer_2 are present in sequence* 
+* *to simplify the exercise, the 2 primers can be read directly in the sv40 sequence.*
+
+test you algorithm with the following primers 
+
+| primer_1 : 5' CGGGACTATGGTTGCTGACT 3'
+| primre_2 : 5' TCTTTCCGCCTCAGAAGGTA 3'
+
+Write the pseudocode before to implement it.
+
+| *function amplicon_len(sequence primer_1, primer_2)*
+|      *pos_1 <- find position of primer_1 in sequence*
+|      *pos_2 <- find position of primer_2 in sequence*
+|      *amplicon length <- pos_2 + length(primer_2) - pos_1*
+|      *return amplicon length* 
+
+
+.. literalinclude:: _static/code/amplicon_len.py
+   :linenos:
+   :language: python
 
 ::
 
-   first_primer = "CGGGACTATGGTTGCTGACT".lower()
-   second_primer = "TCTTTCCGCCTCAGAAGGTA".lower()
-   pos_1 = sv40_sequence.find(first_primer)
-   pos_2 = sv40_sequence.find(second_primer)
-   amplicon_len = pos_2 + len(second_primer) - pos_1 
-   print amplicon_len 
+   >>> import sv40 
+   >>> import fasta_to_one_line
+   >>> 
+   >>> sequence = fasta_to_one_line(sv40)
+   >>> print amplicon_len(sequence, first_primer, second_primer )
    199
+   
+:download:`amplicon_len.py <_static/code/amplicon_len.py>` . 
+
 
 Exercise
 --------
@@ -268,11 +321,11 @@ reverse the following sequence "TACCTTCTGAGGCGGAAAGA" (don't compute the complem
 Exercise
 --------
 
-| il2_human = 'MYRMQLLSCIALSLALVTNSAPTSSSTKKTQLQLEHLLLDLQMILNGINNYKNPKLTRMLTFKFYMPKKATELKHLQCLEEELKPLEEVLNLAQSKNFHLRPRDLISNINVIVLELKGSETTFMCEYADETATIVEFLNRWITFCQSIISTLT'
-| The il2_human contains 4 cysteins (C) in positions 9, 78, 125, 145. We want to generate the sequence of a mutatnt were the cysteins 78 and 125 are replaced by serins (S) 
-| write the pseudo code, before to propose an implementation:
+| The il2_human contains 4 cysteins (C) in positions 9, 78, 125, 145. 
+| We want to generate the sequence of a mutatnt were the cysteins 78 and 125 are replaced by serins (S)
+| Write the pseudocode, before to propose an implementation:
 
-take care of the string numbered vs sequence numbered:
+We have to take care of the string numbered vs sequence numbered:
 
 | C in seq -> in string
 |     9 -> 8
@@ -280,12 +333,16 @@ take care of the string numbered vs sequence numbered:
 |   125 -> 124
 |   145 -> 144
 
-| generate 3 slices from the il2_human
-| head : from the begining and cut between the first cytein and the second 
-| body include  the 2nd and 3rd cystein
-| tail cut after the 3rd cystein until the end 
-| replace body cystein by serin 
-| make new sequence with head body_mutate tail
+| *generate 3 slices from the il2_human*
+| *head <- from the begining and cut between the first cytein and the second* 
+| *body <- include  the 2nd and 3rd cystein*
+| *tail <- cut after the 3rd cystein until the end* 
+| *replace body cystein by serin* 
+| *make new sequence with head body_mutate tail*
+  
+il2_human = 
+'MYRMQLLSCIALSLALVTNSAPTSSSTKKTQLQLEHLLLDLQMILNGINNYKNPKLTRMLTFKFYMPKKATELKHLQCLEEELKPLEEVLNLAQSKNFHLRPRDLISNINVIVLELKGSETTFMCEYADETATIVEFLNRWITFCQSIISTLT'
+  
   
 ::
 
@@ -298,8 +355,34 @@ take care of the string numbered vs sequence numbered:
 Exercise
 --------
 
-# use again the sv40 sequence and compute the gc%
-# generate a "micro" report like this 'the sv40 is 5243 bp lenght and have 40.80% gc'
+Write a function 
+
+* which take a sequence as paramter
+* compute the GC%
+* and return it
+* display the results readable for human as a micro report like this:
+  'the sv40 is 5243 bp length and have 40.80% gc' 
+  
+use sv40 sequence to test your function.
+
+.. literalinclude:: _static/code/gc_percent.py
+   :linenos:
+   :language: python
+
+::
+
+   >>> import sv40 
+   >>> import fasta_to_one_line
+   >>> import gc_percent
+   >>> 
+   >>> sequence = fasta_to_one_line(sv40)
+   >>> gc_pc = gc_percent(sequence)
+   >>> report = the sv40 is {0} bp length and have {1:.2%} gc".format(len(sequence), gc_pc)
+   >>> print report
+   'the sv40 is 5243 bp length and have 40.80% gc'
+   
+:download:`gc_percent.py <_static/code/gc_percent.py>` . 
+
 
 ::
 
