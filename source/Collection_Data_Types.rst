@@ -44,6 +44,11 @@ Exercise
    >>> id(x)
    139950507563632
    
+With mutable object like ``list`` when we mutate the object the state of the object is modified.
+But the reference to the object is still unchanged.
+So in this exemple we have two ways to access to the list [1,2] if we modify the state of the list itself.
+but not the references to this object, then the 2 variables x and y still reference the list containing
+[1,2,3,4]. 
 
 compare with the exercise on string and integers:
 
@@ -52,7 +57,7 @@ We can observe this using *id()* which give the memory adress of an object. This
 ``+=`` operation.
 
 .. note::
-   even the results is the same ther is a subtelty to use augmented operator.
+   even the results is the same there is a subtelty to use augmented operator.
    in ``a operator= b`` python looks up ``a`` ’s value only once, so it is potentially faster
    than the ``a = a operator b``.
 
