@@ -50,7 +50,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'E2I2B python solutions'
+project = u'Python Solutions I'
 copyright = u'2014, Éric Deveaud, Bertrand Néron'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -183,7 +183,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'E2I2Bpythonsolutionsdoc'
+htmlhelp_basename = 'PythonSolutionsIdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -203,7 +203,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'E2I2Bpythonsolutions.tex', u'E2I2B python solutions Documentation',
+  ('index', 'PythonSolutionsI.tex', u'Python Solutions I Documentation',
    u'Éric Deveaud, Bertrand Néron', 'manual'),
 ]
 
@@ -268,7 +268,7 @@ texinfo_documents = [
 # -- Options for Epub output ----------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'E2I2B python solutions'
+epub_title = u'Python Solutions I'
 epub_author = u'Éric Deveaud, Bertrand Néron'
 epub_publisher = u'Éric Deveaud, Bertrand Néron'
 epub_copyright = u'2014, Éric Deveaud, Bertrand Néron'
