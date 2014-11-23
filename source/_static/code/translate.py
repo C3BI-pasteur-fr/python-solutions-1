@@ -19,17 +19,21 @@ genetic_code = {  'ttt': 'F', 'tct': 'S', 'tat': 'Y', 'tgt': 'C',
 def translate(nuc_seq, code):
     
     prot_seq = ''
-    start = 0
-    while (start + 2) < len(nuc_seq):
+    n = 0
+    # to avoid to compute len(seq)/3 at each loop
+    # I compute it once and use a reference
+    # it could be expensive if the sequence is very long.
+    cycle = len(nuc_seq)/3
+    while n < cycle:
+        start = n * 3
         end = start + 3
-        print start, end
         codon = nuc_seq[start:end]
         codon = codon.lower()
         if codon in code:
             prot_seq += code[codon] 
         else:
             raise RuntimeError("unknow codon: " + codon)
-        start += 3
+        n += 1
     return prot_seq
         
 def translate2(nuc_seq, code, phase = 1):
@@ -39,7 +43,9 @@ def translate2(nuc_seq, code, phase = 1):
     elif -4 < phase < 0:
         start = -phase - 1
         nuc_seq = nuc_seq[::-1]
-    while(start + 2) < len(nuc_seq):
+    # an other way to determine the end of looping
+    stop_iteration = len(nuc_seq)
+    while (start + 2) < stop_iteration:
         end = start + 3
         codon = nuc_seq[start:end].lower()
         if codon in code:

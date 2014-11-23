@@ -195,7 +195,7 @@ without header or any non sequence characters
 
 pseudocode:
 
-|   *fasta_to_one_line(seq)*
+|   *function fasta_to_one_line(seq)*
 |      *header_end_at <- find the first return line character*
 |      *raw_seq <- remove header from sequence*
 |      *raw_seq <- remove non sequence chars*

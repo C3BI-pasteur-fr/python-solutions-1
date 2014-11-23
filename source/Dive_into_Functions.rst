@@ -1,8 +1,8 @@
-.. _Creating_and_Calling_Functions:
+.. _Dive_into_Functions:
 
-******************************
-Creating and Calling Functions
-******************************
+*******************
+Dive into Functions
+*******************
 
 Exercises
 =========
@@ -105,7 +105,7 @@ As soon as you make an assignment to a variable in a scope,
 that variable becomes local to that scope and shadows any similarly named variable in the outer scope.
 even if the assignment appear later in code.
 Here *x = y* make *x* as local variable whatever you are in func.
-so at line  *y = x + 2* we try to use the loca variable *x* but we have to asign it a value (it is done later) so
+so at line  *y = x + 2* we try to use the local variable *x* but we have to asign it a value (it is done later) so
 Python raise an UnboundLocalError (`see python faq for details <https://docs.python.org/3/faq/programming.html#why-am-i-getting-an-unboundlocalerror-when-the-variable-has-a-value>`_) 
 
 .. container:: clearer

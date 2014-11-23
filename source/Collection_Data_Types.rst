@@ -61,6 +61,38 @@ We can observe this using *id()* which give the memory adress of an object. This
    in ``a operator= b`` python looks up ``a`` ’s value only once, so it is potentially faster
    than the ``a = a operator b``.
 
+
+compare ::
+
+   x = 3
+   y = x
+   y += 3
+   x = ?
+   y = ?
+   
+   
+.. figure:: _static/figs/augmented_assignment_int2.png  
+   :width: 400px
+   :alt: augmented_assignment
+   :figclass: align-center 
+
+   
+and ::
+
+   x = [1,2]
+   y = x
+   y += [3,4]
+   x = ?
+   y = ?  
+
+
+.. figure:: _static/figs/augmented_assignment_list2.png  
+   :width: 400px
+   :alt: list extend
+   :figclass: align-center 
+
+
+
 Exercise
 --------
 
@@ -142,15 +174,51 @@ from the list l = [1, 2, 3, 4, 5, 6, 7, 8, 9] generate 2 lists l1 containing all
 Exercise
 --------
    
-generate a list containing all codons. ::
+generate a list containing all codons.
    
-   bases = 'acgt'
-   codons = []
-      for a in bases:
-         for b in bases:
-            for c in bases:
-               codon = a + b + c
-               codons.append(codon)
+pseudocode:
+"""""""""""
+
+| *function all_codons()*
+|     *all_codons <- empty list*
+|     *let varying the first base*
+|     *for each first base let varying the second base*
+|     *for each combination first base, second base let varying the third base*
+|     *add the concatenation base 1 base 2 base 3 to all_codons*
+|     *return all_codons*
+
+first implementation:
+"""""""""""""""""""""
+.. literalinclude:: _static/code/codons.py
+   :linenos:
+   :language: python
+
+::
+
+   python -i codons.py 
+   >>> codons = all_codons()
+   
+:download:`codons.py <_static/code/codons.py>` .  
+
+second implementation:
+""""""""""""""""""""""
+
+Mathematically speaking the generation of all codons can be the cartesiens product 
+between 3 vectors 'acgt'. 
+In python there is a function to do that in ``itertools module``: `https://docs.python.org/2/library/itertools.html#itertools.product <product>`_
+
+
+.. literalinclude:: _static/code/codons_itertools.py
+   :linenos:
+   :language: python
+
+::
+
+   python -i codons.py 
+   >>> codons = all_codons()
+   
+:download:`codons_itertools.py <_static/code/codons_itertools.py>` .
+
                
 Exercise
 --------
@@ -162,10 +230,241 @@ For example: ::
    >>> uniqify(l)
    >>> [1,2,3,5] #is one of the solutions 
 
-solution ::
 
+pseudocode:
+"""""""""""
+
+| *function uniqify(l)*
+|     *uniq <- empty list*
+|     *for each element of l*
+|        *add element if is not in uniq*
+|     *return uniq*
+
+implementation:
+"""""""""""""""
+
+.. literalinclude:: _static/code/uniqify.py
+   :linenos:
+   :language: python
+
+::
+
+   >>> l=[1,2,3,2,3,4,5,1,2,3,3,2,7,8,9]
+   >>> uniqify(l)
+   [1, 2, 3, 4, 5, 7, 8, 9]
+
+:download:`codons_itertools.py <_static/code/codons_itertools.py>` .
+
+second implementation:
+""""""""""""""""""""""
+
+The problem with the first implementation come from the line 4.
+Remember that the membership operator uses a linear search for list, which can be slow for very large collections.
+If we plan to use ``uniqify`` with large list we should find a better algorithm.
+In the specification we can read that uniqify can work *regardless the order of the resulting list*.
+So we can use the specifycity of set ::
+
+ 
    >>> list(set(l))
 
+
+Exercise
+--------
+
+We need to compute the occurence of all kmers of a given lenght present in a sequence.
+
+Below we propose 2 algorithms. 
+
+pseudo code 1
+"""""""""""""
+
+|   *function get_kmer_occurences(seq, kmer_len)*
+|      *all_kmers <- generate all possible kmer of kmer_len*
+|      *occurences <- 0* 
+|      *for each kmer in all_kmers*
+|         *count occurence of kmer*
+|         *store occurence*
+     
+pseudo code 2
+"""""""""""""
+
+|  *function get_kmer_occurences(seq, kmer_len)*
+|     *all_kmers <- empty*
+|     *from i = 0 to sequence length - kmer_len*
+|        *kmer <- kmer startin at pos i im sequence*
+|        *increase by of occurence of kmer*
+ 
+
+.. note::
+
+   Computer scientists typically measure an algorithm’s efficiency in terms of its worst-case running time, 
+   which is the largest amount of time an algorithm can take given the most difficult input of a fixed size. 
+   The advantage to considering the worst case running time is that we are guaranteed that our algorithm 
+   will never behave worse than our worst-case estimate.
+   
+   Big-O notation compactly describes the running time of an algorithm. 
+   For example, if your algorithm for sorting an array of n numbers takes roughly n2 operations for the most difficult dataset, 
+   then we say that the running time of your algorithm is O(n2). In reality, depending on your implementation, it may be use any number of operations, 
+   such as 1.5n2, n2 + n + 2, or 0.5n2 + 1; all these algorithms are O(n2) because big-O notation only cares about the term that grows the fastest with 
+   respect to the size of the input. This is because as n grows very large, the difference in behavior between two O(n2) functions, 
+   like 999 · n2 and n2 + 3n + 9999999, is negligible when compared to the behavior of functions from different classes, 
+   say O(n2) and O(n6). Of course, we would prefer an algorithm requiring 1/2 · n2 steps to an algorithm requiring 1000 · n2 steps.
+
+   When we write that the running time of an algorithm is O(n2), we technically mean that it does not grow faster than a function with a 
+   leading term of c · n2, for some constant c. Formally, a function f(n) is Big-O of function g(n), or O(g(n)), when f(n) ≤ c · g(n) for some 
+   constant c and sufficiently large n.
+
+   For more on Big-O notation, see A `http://rob-bell.net/2009/06/a-beginners-guide-to-big-o-notation/Beginner's <Guide to Big-O Notation>`_.
+   
+
+Compare the pseudocode of each of them and implement the fastest one. ::
+
+   """gtcagaccttcctcctcagaagctcacagaaaaacacgctttctgaaagattccacactcaatgccaaaatataccacag
+      gaaaattttgcaaggctcacggatttccagtgcaccactggctaaccaagtaggagcacctcttctactgccatgaaagg
+      aaaccttcaaaccctaccactgagccattaactaccatcctgtttaagatctgaaaaacatgaagactgtattgctcctg
+      atttgtcttctaggatctgctttcaccactccaaccgatccattgaactaccaatttggggcccatggacagaaaactgc
+      agagaagcataaatatactcattctgaaatgccagaggaagagaacacagggtttgtaaacaaaggtgatgtgctgtctg
+      gccacaggaccataaaagcagaggtaccggtactggatacacagaaggatgagccctgggcttccagaagacaaggacaa
+      ggtgatggtgagcatcaaacaaaaaacagcctgaggagcattaacttccttactctgcacagtaatccagggttggcttc
+      tgataaccaggaaagcaactctggcagcagcagggaacagcacagctctgagcaccaccagcccaggaggcacaggaaac
+      acggcaacatggctggccagtgggctctgagaggagaaagtccagtggatgctcttggtctggttcgtgagcgcaacaca"""
+
+
+In the first alogrithm. 
+
+| we first compute all kmers we generate 4\ :sup:`kmer length`
+| then we count the occurence of each kmer in the sequence
+| so for each kmer we read all the sequence so the algorith is in O( 4\ :sup:`kmer length` * ``sequence length``) 
+
+| In the secon algorithm we read the sequence only once 
+| So the algorithm is in O(sequence length)
+
+
+Compute the 6 mers occurences of the sequence above, and print each 6mer and it's occurence one per line.
+
+.. literalinclude:: _static/code/kmer.py
+   :linenos:
+   :language: python
+
+::
+
+   >>> s = """"gtcagaccttcctcctcagaagctcacagaaaaacacgctttctgaaagattccacactcaatgccaaaatataccacag
+   ... gaaaattttgcaaggctcacggatttccagtgcaccactggctaaccaagtaggagcacctcttctactgccatgaaagg
+   ... aaaccttcaaaccctaccactgagccattaactaccatcctgtttaagatctgaaaaacatgaagactgtattgctcctg
+   ... atttgtcttctaggatctgctttcaccactccaaccgatccattgaactaccaatttggggcccatggacagaaaactgc
+   ... agagaagcataaatatactcattctgaaatgccagaggaagagaacacagggtttgtaaacaaaggtgatgtgctgtctg
+   ... gccacaggaccataaaagcagaggtaccggtactggatacacagaaggatgagccctgggcttccagaagacaaggacaa
+   ... ggtgatggtgagcatcaaacaaaaaacagcctgaggagcattaacttccttactctgcacagtaatccagggttggcttc
+   ... tgataaccaggaaagcaactctggcagcagcagggaacagcacagctctgagcaccaccagcccaggaggcacaggaaac
+   ... acggcaacatggctggccagtgggctctgagaggagaaagtccagtggatgctcttggtctggttcgtgagcgcaacaca"""
+   >>> s = s.replace('\n', '')
+   >>> kmers = get_kmer_occurences(s, 6)
+   >>> for kmer in kmers:
+   >>>   print kmer[0], '..', kmer[1]
+   gcagag .. 2
+   aacttc .. 1
+   gcaact .. 1
+   aaatat .. 2
+   
+   
+:download:`kmer.py <_static/code/kmer.py>` .
+
+
+bonus:
+""""""
+
+Print the kmers by ordered by occurences.
+
+| see `https://docs.python.org/2/library/stdtypes.html#mutable-sequence-types <sort>`_
+| see `https://docs.python.org/2/library/operator.html#operator.itemgetter <operator.itemgetter>`_
+
+
+.. literalinclude:: _static/code/kmer_2.py
+   :linenos:
+   :language: python
+
+::
+
+   >>> s = """"gtcagaccttcctcctcagaagctcacagaaaaacacgctttctgaaagattccacactcaatgccaaaatataccacag
+   ... gaaaattttgcaaggctcacggatttccagtgcaccactggctaaccaagtaggagcacctcttctactgccatgaaagg
+   ... aaaccttcaaaccctaccactgagccattaactaccatcctgtttaagatctgaaaaacatgaagactgtattgctcctg
+   ... atttgtcttctaggatctgctttcaccactccaaccgatccattgaactaccaatttggggcccatggacagaaaactgc
+   ... agagaagcataaatatactcattctgaaatgccagaggaagagaacacagggtttgtaaacaaaggtgatgtgctgtctg
+   ... gccacaggaccataaaagcagaggtaccggtactggatacacagaaggatgagccctgggcttccagaagacaaggacaa
+   ... ggtgatggtgagcatcaaacaaaaaacagcctgaggagcattaacttccttactctgcacagtaatccagggttggcttc
+   ... tgataaccaggaaagcaactctggcagcagcagggaacagcacagctctgagcaccaccagcccaggaggcacaggaaac
+   ... acggcaacatggctggccagtgggctctgagaggagaaagtccagtggatgctcttggtctggttcgtgagcgcaacaca"""
+   >>> s = s.replace('\n', '')
+   >>> kmers = get_kmer_occurences(s, 6)
+   >>> for kmer, occ in kmers:
+   >>>   print kmer, '..', occ
+   cacagg .. 4
+   aggaaa .. 4
+   ttctga .. 3
+   ccagtg .. 3
+   
+   
+:download:`kmer_2.py <_static/code/kmer_2.py>` .
+
+
+Exercise
+--------
+
+| Write a function which take a sequence as parameter and return it's reversed complement.
+| Write the pseudocode before to propose an implementation.
+
+pseudocode:
+"""""""""""
+
+| *function reverse_comp(sequence)*
+|     *complement <- establish a correpondance and each base and its complement*
+|     *rev_seq <- revert the sequence*
+|     *rev_comp <- empty*
+|     *for each nt of rev_seq*
+|        *concatenate nt complement to rev_comp*
+|     *return rev_comp
+
+.. literalinclude:: _static/code/rev_comp2.py
+   :linenos:
+   :language: python
+
+::
+   >>> from rev_comp import rev_comp
+   >>>
+   >>> seq = 'acggcaacatggctggccagtgggctctgagaggagaaagtccagtggatgctcttggtctggttcgtgagcgcaacaca'
+   >>> print rev_comp(seq)
+   tgtgttgcgctcacgaaccagaccaagagcatccactggactttctcctctcagagcccactggccagccatgttgccgt
+   
+:download:`rev_comp.py <_static/code/rev_comp.py>` .
+
+  
+other solution
+""""""""""""""
+
+python provide an interresting method for our problem. 
+The ``translate`` method work on string and need a parameter which is a object
+that can do the correspondance between characters in old string a the new one.
+``maketrans`` is a function in module ``string`` that allow us to build this object.
+``maketrans`` take 2 arguments, two strings, the first string contains the characters
+to change, the second string the corresponding characters in the new string.
+Thus the two strings **must** have the same lenght. The correspondance between
+the characters to change and their new values is made in funtion of thier position.
+the first character of the first string will be replaced by the first character of the second string,
+the second character of the first string will be replaced by the second character of the second string, on so on.   
+So we can write the reverse complement without loop.
+   
+.. literalinclude:: _static/code/rev_comp2.py
+   :linenos:
+   :language: python
+
+::
+   >>> from rev_comp2 import rev_comp
+   >>>
+   >>> seq = 'acggcaacatggctggccagtgggctctgagaggagaaagtccagtggatgctcttggtctggttcgtgagcgcaacaca'
+   >>> print rev_comp(seq)
+   tgtgttgcgctcacgaaccagaccaagagcatccactggactttctcctctcagagcccactggccagccatgttgccgt
+   
+:download:`rev_comp2.py <_static/code/rev_comp2.py>` .
 
 Exercise
 --------
@@ -199,30 +498,31 @@ and the 2 dna fragments: ::
 |                  the dna_2 ?
 |                  the dna_1 but not the dna_2?
 
+
+#. Write a function *seq_one_line* which take a multi lines sequence and return a sequence in one line.
+#. Write a function *enz_filter* which take a sequence and a list of enzymes and return a new list containing 
+   the enzymes which are a binding site in the sequence
+#. use the functions above to compute the enzymes which cut the dna_1 
+   apply the same functions to compute the enzymes which cut the dna_2
+   compute the difference between the enzymes which cut the dna_1 and enzymes which cut the dna_2
+   
+.. literalinclude:: _static/code/enzymes_1.py
+   :linenos:
+   :language: python
+
 ::
-
-   dna_1 = dna_1.replace('\n', '')
-   dans_2 = dna_2.replace('\n', '')
-
-algorithm 1 ::
-
-   enzymes = [ecor1, ecor5, bamh1, hind3, taq1, not1, sau3a1, hae3, sma1]
-   digest_1 = []
-   for enz in enzymes:
-      if enz.sequence in dna_1:
-         digest_1.append(enz)
-
-algorithm 2 we can determine the position of the site :: 
+   from enzyme_1 import *
    
    enzymes = [ecor1, ecor5, bamh1, hind3, taq1, not1, sau3a1, hae3, sma1]
-   digest_1 = []
-   for enz in enzymes:
-      pos = dna_1.find(enz.sequence)
-      if pos != -1:
-         digest_1.append(enz)
+   dna_1 = one_line(dna_1)
+   dans_2 = one_line(dna_2)
+   enz_1 = enz_filter(enzymes, dna_1)
+   enz_2 = enz_filter(enzymes, dna_2) 
+   enz1_only = set(enz_1) - set(enz_2)
 
+:download:`enzymes_1.py <_static/code/enzymes_1.py>` .
 
-with these algorithms we find if an enzyme cut the dna but we cannot find all cuts in the dna for an enzyme. ::
+with this algorithm we find if an enzyme cut the dna but we cannot find all cuts in the dna for an enzyme. ::
 
    enzymes = [ecor1, ecor5, bamh1, hind3, taq1, not1, sau3a1, hae3, sma1]
    digest_1 = []
@@ -230,134 +530,8 @@ with these algorithms we find if an enzyme cut the dna but we cannot find all cu
       print enz.name, dna_1.count(enz.sequence)
 
 the latter algorithm display the number of occurence of each enzyme, But we cannot determine the position of every sites.
-We will see howt to do this later.
+We will see how to do this later.
 
-
-
-Exercise
---------
-From a list return a new list without any duplicate, but keeping the order of items. 
-For example: ::
-
-   >>> l = [5,2,3,2,2,3,5,1]
-   >>> uniqify_with_order(l)
-   >>> [5,2,3,1]  
-
-solution ::
-
-   >>> uniq = []
-   >>> for item in l:
-   >>>   if item not in uniq:
-   >>>      uniq.append(item)
-
-
-Exercise
---------
-
-list and count occurences of every 3mers in the following sequence ::
-
-   s = """gtcagaccttcctcctcagaagctcacagaaaaacacgctttctgaaagattccacactcaatgccaaaatataccacag
-   gaaaattttgcaaggctcacggatttccagtgcaccactggctaaccaagtaggagcacctcttctactgccatgaaagg
-   aaaccttcaaaccctaccactgagccattaactaccatcctgtttaagatctgaaaaacatgaagactgtattgctcctg
-   atttgtcttctaggatctgctttcaccactccaaccgatccattgaactaccaatttggggcccatggacagaaaactgc
-   agagaagcataaatatactcattctgaaatgccagaggaagagaacacagggtttgtaaacaaaggtgatgtgctgtctg
-   gccacaggaccataaaagcagaggtaccggtactggatacacagaaggatgagccctgggcttccagaagacaaggacaa
-   ggtgatggtgagcatcaaacaaaaaacagcctgaggagcattaacttccttactctgcacagtaatccagggttggcttc
-   tgataaccaggaaagcaactctggcagcagcagggaacagcacagctctgagcaccaccagcccaggaggcacaggaaac
-   acggcaacatggctggccagtgggctctgagaggagaaagtccagtggatgctcttggtctggttcgtgagcgcaacaca"""
-
-and finally print the results one 3mer and it's occurence per line. 
-
-write first the pseudocode, then implement it.
-
-bonus:
-print the kmer by incresing occurences.
-
-solution ::
-
-   s = s.replace('\n', '')
-   kmers = {}
-   # range exclude the last value range(3) -> 0, 1 ,2
-   # so we nned to go to len(s) minus trimer + 1 to include the 
-   # last base 
-   for i in range(len(s) - 3 +1):
-      kmer = s[i:i+3]
-      kmers[kmer] = kmers.get(kmer, 0) + 1
-
-   for kmer, occurence in kmers.items():
-      print kmer, " = ", occurence
-
-we can use also a defaultdict: ::
-
-   import collections
-   
-   s = s.replace('\n', '')
-   kmers = collection.defaultdict(int)
-   for i in range(len(s) - 2):
-      kmer = s[i:i+3]
-      kmers[kmer] += 1
-
-solution bonus ::
-
-   list_of_kmers = kmers.items()  
-   from operator import itemgetter
-   list_of_kmers.sort(key=itemgetter(1)) 
-   for kmer, occurence in list_of_kmers:
-      print kmer, " = ", occurence
-
- solution bonus ::
-
-   list_of_kmers = kmers.items()      
-   list_of_kmers.sort(key = lambda kmer: kmer[1])
-   for kmer, occurence in list_of_kmers:
-      print kmer, " = ", occurence   
-      
-  
-Exercise
---------
-
-compute the reversed complement of the following sequence: ::
-
-   seq = 'acggcaacatggctggccagtgggctctgagaggagaaagtccagtggatgctcttggtctggttcgtgagcgcaacaca'
-
-   base_comp = { 'a' : 't', 
-                 'c' : 'g',
-                 'g' : 'c',
-                 't' : 'a'}
-   complement = ''
-   for base in seq:
-      complement += base_comp[base]
-
-   reverse_comp = complement[::-1]
-   print reverse_comp
-   tgtgttgcgctcacgaaccagaccaagagcatccactggactttctcctctcagagcccactggccagccatgttgccgt
-  
-other solution
-""""""""""""""
-
-python provide an interresting method for our problem. 
-The ``translate`` method work on string and need a parameter which is a object
-that can do the correspondance between characters in old string a the new one.
-``maketrans`` is a function in module ``string`` that allow us to build this object.
-``maketrans`` take 2 arguments, two strings, the first string contains the characters
-to change, the second string the corresponding characters in the new string.
-Thus the two strings **must** have the same lenght. The correspondance between
-the characters to change and their new values is made in funtion of thier position.
-the first character of the first string will be replaced by the first character of the second string,
-the second character of the first string will be replaced by the second character of the second string, on so on.   
-So we can write the reverse complement without loop.
-
-::
-
-   from string import maketrans
-
-   #first we reverse the sequence
-   rev_comp = seq[::-1]
-   #then we complement it
-   nucleotide = 'ATCG'
-   complement = 'TAGC'
-   rosetta_stone = maketrans(nucleotide, complement)
-   rev_comp = rev_comp.translate(rosetta_stone)
 
       
 Exercise
@@ -387,36 +561,3 @@ solution ::
 
    inverted_d = {v : k for k, v in d.items()}
    
-Exercise
---------
-
-We assume that we have a phylogenic tree of mammals represented as nested lists. ::
-    
-   mammals = ['Bovine', ['Gibbon', ['Orang Utan', ['Gorilla', ['Chimp', 'Human']]]], 'Mouse' ]
-   
-We want to work on the subtree of apes (Gibbon, Orang Utan, Gorilla, Chimp, Human) 
-
-* extract the this subtree in a new tree
-* then insert 'Bonobo' at the same level of Chimp we want to obtanin something like this :[chimp, bonobo], Human]
-   
-what's append on mammals? explain the result. ::
-
-   import copy
-     
-   mammals = ['Bovine', ['Gibbon', ['Orang Utan', ['Gorilla', ['Chimp', 'Human']]]], 'Mouse' ]
-   apes = copy.copy(mammals[1])
-   apes [1][1][1] = [['Chimp', 'Bonobo'], 'Human']
-   print mammals
-   ['Bovine', ['Gibbon', ['Orang Utan', ['Gorilla', ['Chimp', 'Human']]]], 'Mouse' ]
-
-what we should do to work with apes without modify mammals?
-   
-when we extract apes form mammals we did a shallow copy of mammals. tha mean we create a new list but each item in mammals 
-are not copy. when we modify apes we mutate an element of apes which was also referenced in mammals so mammals is modified to.
-This is what we call a side effect. To avoid that we should use deepcopy from module copy.
-to create apes we should write: ::
-
-   apes = copy.deepcopy(mammals[1]) 
-   
-deepcopy not only copy the list but make also a copy of each items of list recursively.
- 

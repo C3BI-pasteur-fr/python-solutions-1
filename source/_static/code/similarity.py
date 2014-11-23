@@ -1,25 +1,26 @@
+import sys
+import os.path
+
+sys.path.insert(0, os.path.join(expanduser('~'), "my_python_lib"))
+
 import matrix
 
-lines = iter( ['  A G C U\n',
-               'A 1.0 0.5 0.0 0.0\n',
-               'G 0.5 1.0 0.0 0.0\n',
-               'C 0.0 0.0 1.0 0.5\n',
-               'U 0.0 0.0 0.5 1.0\n']
-             )
 
-def parse_similarity_file():
+def parse_similarity_file(path):
     """
     parse file containing RNA similarity matrix and return a matrix
     """
     sim_matrix = matrix.create(4, 4)
-    #skip first line
-    lines.next()
-    for row_no, line in enumerate(lines):
-        line = line.strip()
-        fields = line.split()
-        values = [float(val) for val in fields[1:]]
-        matrix.replace_row(sim_matrix, row_no, values)
+    with open(path, 'r') as sim_file:
+        #skip first line
+        sim_file.next()
+        for row_no, line in enumerate(sim_file):
+            line = line.strip()
+            fields = line.split()
+            values = [float(val) for val in fields[1:]]
+            matrix.replace_row(sim_matrix, row_no, values)
     return sim_matrix
+
 
 def get_similarity(b1, b2, sim_matrix):
     """
@@ -40,6 +41,7 @@ def get_similarity(b1, b2, sim_matrix):
     if not b2 in bases:
         raise KeyError("unknown base b2: " + str(b2))
     return matrix.get_cell(sim_matrix, bases[b1], bases[b2])
+                      
                            
 def compute_similarity(seq1, seq2, sim_matrix):
     """
@@ -58,11 +60,12 @@ def compute_similarity(seq1, seq2, sim_matrix):
         sim = get_similarity(b1, b2, sim_matrix)
         similarities.append(sim)
     return sum(similarities)
+       
             
 if __name__ == '__main__':
     seq1 = 'AGCAUCUA'
     seq2 = 'ACCGUUCU'
-    sim_matrix = parse_similarity_file()
+    sim_matrix = parse_similarity_file("similarity_matrix")
     print matrix.to_str(sim_matrix)
     similarity = compute_similarity(seq1, seq2, sim_matrix)
     print similarity
