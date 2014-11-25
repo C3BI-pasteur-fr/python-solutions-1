@@ -181,8 +181,8 @@ create a representation in fasta format of following sequence :
 Exercise
 --------
 
-For the following exercise use the python file :download:`sv40 in fasta <_static/code/sv40.py>` which is a python file with the sequence of sv40 in fasta format
-already embeded, and use python -i sv40.py to work.
+For the following exercise use the python file :download:`sv40 in fasta <_static/code/sv40_file.py>` which is a python file with the sequence of sv40 in fasta format
+already embeded, and use python -i sv40_file.py to work.
 
 how long is the sv40 in bp? 
 Hint : the fasta header is 61bp long.
@@ -212,14 +212,15 @@ pseudocode:
 ::
 
    python
-   >>> import sv40
+   >>> import sv40_file
    >>> import fasta_to_one_line
    >>>
-   >>> sv40seq = fasta_to_one_line(sv40) 
-   >>> print len(sv40_sequence)
+   >>> sv40_seq = fasta_to_one_line(sv40_file.sv40_fasta) 
+   >>> print len(sv40_seq)
    5243
 
 Is that the following enzymes: 
+
 * BamHI (ggatcc), 
 * EcorI (gaattc), 
 * HindIII (aagctt), 
