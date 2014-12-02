@@ -98,7 +98,7 @@ Exercise
  
 .. literalinclude:: _static/code/restriction.py
    :linenos:
-   :lines: 1-8
+   :lines: 1-13
    :language: python
    
 * improve the previous function to return all positions of binding sites
@@ -116,7 +116,7 @@ Exercise
 
 .. literalinclude:: _static/code/restriction.py
    :linenos:
-   :lines: 9-16
+   :lines: 13-25
    :language: python
 
 **pseudocode of second algorithm**
@@ -133,7 +133,7 @@ Exercise
 
 .. literalinclude:: _static/code/restriction.py
    :linenos:
-   :lines: 19-25
+   :lines: 25-36
    :language: python
    
    
@@ -170,7 +170,7 @@ in bonus we can try to sort the list in the order of the position of the binding
 
 .. literalinclude:: _static/code/restriction.py
    :linenos:
-   :lines: 27-
+   :lines: 37-
    :language: python
    
 ::
