@@ -425,7 +425,7 @@ pseudocode:
 |     *rev_comp <- empty*
 |     *for each nt of rev_seq*
 |        *concatenate nt complement to rev_comp*
-|     *return rev_comp
+|     *return rev_comp*
 
 .. literalinclude:: _static/code/rev_comp2.py
    :linenos:
@@ -509,7 +509,7 @@ and the 2 dna fragments: ::
    apply the same functions to compute the enzymes which cut the dna_2
    compute the difference between the enzymes which cut the dna_1 and enzymes which cut the dna_2
    
-.. literalinclude:: _static/code/enzymes_1.py
+.. literalinclude:: _static/code/enzyme_1.py
    :linenos:
    :language: python
 
@@ -523,7 +523,7 @@ and the 2 dna fragments: ::
    enz_2 = enz_filter(enzymes, dna_2) 
    enz1_only = set(enz_1) - set(enz_2)
 
-:download:`enzymes_1.py <_static/code/enzymes_1.py>` .
+:download:`enzymes_1.py <_static/code/enzyme_1.py>` .
 
 with this algorithm we find if an enzyme cut the dna but we cannot find all cuts in the dna for an enzyme. ::
 
