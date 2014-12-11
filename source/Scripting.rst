@@ -1,6 +1,0 @@
-.. _Scripting:
-
-
-*********
-Scripting
-*********
