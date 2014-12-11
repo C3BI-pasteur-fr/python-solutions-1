@@ -10,13 +10,9 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
    
-   Introduction
-   Variables
    Data_Types
    Collection_Data_Types
-   Logical_Operations
    Control_Flow_Statements
    Dive_into_Functions
    Modules_and_Packages

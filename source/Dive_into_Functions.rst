@@ -1,3 +1,6 @@
+.. sectnum::
+   :start: 8
+
 .. _Dive_into_Functions:
 
 *******************
