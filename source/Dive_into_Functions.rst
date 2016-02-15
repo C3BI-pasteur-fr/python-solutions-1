@@ -16,7 +16,7 @@ Exercise
 Without executing the code in Python interpreter, can you determine what the code below print out. 
 help you by drawing diagram.
 
-**Hint** locals print a dictionnary with local variable as keys and theire respectives values.
+**Hint** locals print a dictionary with local variable as keys and their respective values.
 
 .. figure:: _static/figs/cf_exo_1.png
     :width: 400px
@@ -46,7 +46,7 @@ Exercise
 Without executing the code in Python interpreter, can you determine what the code below print out. 
 help you by drawing diagram.
 
-**Hint** locals print a dictionnary with local variable as keys and theire respectives values.
+**Hint** locals print a dictionary with local variable as keys and their respective values.
 
 .. figure:: _static/figs/cf_exo_2.png
     :width: 400px
@@ -81,7 +81,7 @@ Exercise
 Without executing the code in Python interpreter, can you determine what the code below print out. 
 help you by drawing diagram.
 
-**Hint** locals print a dictionnary with local variable as keys and theire respectives values.
+**Hint** locals print a dictionary with local variable as keys and their respective values.
 
 .. figure:: _static/figs/cf_exo_3.png
     :width: 400px
@@ -122,7 +122,7 @@ Exercise
 Without executing the code in Python interpreter, can you determine what the code below print out. 
 help you by drawing diagram.
 
-**Hint** locals print a dictionnary with local variable as keys and theire respectives values.
+**Hint** locals print a dictionary with local variable as keys and their respective values.
 
 .. figure:: _static/figs/cf_exo_4.png
     :width: 400px
@@ -246,7 +246,7 @@ Exercice
 Without executing the code in Python interpreter, can you determine what the code below print out. 
 help you by drawing diagram.
 
-**Hint** locals print a dictionnary with local variable as keys and theire respectives values.
+**Hint** locals print a dictionary with local variable as keys and their respective values.
 
 .. figure:: _static/figs/cf_exo_8.png
     :width: 400px
@@ -367,7 +367,7 @@ help you by drawing diagram.
 | in func *x* does not exist, so *x* refer to global variable *x*
 | we mutate *x*
 | *func2* is never executed
-| we return *a* so the same object refered by *x*
+| we return *a* so the same object referred by *x*
 | so *y* refer also the same object as *x*
 
 .. container:: clearer
@@ -402,7 +402,7 @@ help you by drawing diagram.
    {'a': 4, 'b': 6}
 
 | in this code *func2* is executed
-| *a* is not in *func2* namesapce so python find it in enclosing namespace *func*
+| *a* is not in *func2* namespace so python find it in enclosing namespace *func*
 | *a* refer the same object as *x*
 
 .. container:: clearer
@@ -436,9 +436,9 @@ help you by drawing diagram.
    print x
    {'a': 4, 'b': 5}
    
-| in this code *x* a variable x is defined localy in *func2* and hide the global variable x
-| this local *x* refer to a shalow copy of the *func* local variable *a* which refer to the same object as global variable *x*
-| so func2 does not do a side effect on dictionnary referd by *x* as in previous example. 
+| in this code *x* a variable x is defined locally in *func2* and hide the global variable x
+| this local *x* refer to a shallow copy of the *func* local variable *a* which refer to the same object as global variable *x*
+| so func2 does not do a side effect on dictionary referred by *x* as in previous example.
 
 .. container:: clearer
 
@@ -448,8 +448,8 @@ help you by drawing diagram.
 Exercice
 --------
 
-Use the code of the exetrcise 4.5.7 on the kmer. 
-Make a function which compute all kmer of a given lenght in a sequence.
+Use the code of the exercise 4.5.7 on the kmer.
+Make a function which compute all kmer of a given length in a sequence.
 
 .. literalinclude:: _static/code/kmer.py
    :linenos:
