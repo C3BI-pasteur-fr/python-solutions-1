@@ -17,6 +17,11 @@ class FastaParser(object):
         self._current_sequence = ''
 
     def _parse_header(self, line):
+        """
+        parse the header line and  _current_id|comment|sequence attributes
+        :param line: the line of header in fasta format
+        :type line: string
+        """
         header = line.split()
         self._current_id = header[0]
         self._current_comment = ' '.join(header[1:])
@@ -26,6 +31,13 @@ class FastaParser(object):
         return self
 
     def next(self):
+        """
+        :return: at each call return a new :class:`Sequence` object
+        :raise: StopIteration
+        """
+        """
+        :return:
+        """
         for line in self._file:
             if line.startswith('>'):
                 # a new sequence begin
