@@ -23,7 +23,7 @@ class FastaParser(object):
         :type line: string
         """
         header = line.split()
-        self._current_id = header[0]
+        self._current_id = header[0][1:]
         self._current_comment = ' '.join(header[1:])
         self._current_sequence = ''
 
