@@ -26,7 +26,7 @@ def fasta_reader(fasta_file):
                 comment = ' '.join(header[1:])
             else:
                 # I already parse a sequence
-                # So the begining of this sequence indicate the end of the
+                # So the beginning of this sequence indicate the end of the
                 # previous sequence
                 # put the cursor one line in back for the next fasta_reader call
                 fasta_file.seek(-len(line),1)
