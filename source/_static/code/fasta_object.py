@@ -35,9 +35,6 @@ class FastaParser(object):
         :return: at each call return a new :class:`Sequence` object
         :raise: StopIteration
         """
-        """
-        :return:
-        """
         for line in self._file:
             if line.startswith('>'):
                 # a new sequence begin
