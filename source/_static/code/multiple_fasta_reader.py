@@ -1,6 +1,6 @@
 from collections import namedtuple 
 
-Sequence =  namedtuple("Sequence", "id comment sequence")
+Sequence = namedtuple("Sequence", "id comment sequence")
 
 def fasta_reader(fasta_path):
     """
@@ -19,14 +19,14 @@ def fasta_reader(fasta_path):
                 # a new sequence begin
                 if id_ != '':
                     # a sequence was already parsed so add it to the list
-                    sequences.append(Sequence(id_ , comment, sequence))
+                    sequences.append(Sequence(id_, comment, sequence))
                     sequence = ''
                 header = line.split()
                 id_ = header[0]
                 comment = ' '.join(header[1:])
             else:
                 sequence += line.strip()
-                sequences.append(Sequence(id_ , comment, sequence))
+                sequences.append(Sequence(id_, comment, sequence))
     return sequences
 
 
@@ -34,4 +34,3 @@ def fasta_reader(fasta_path):
 # sequences in memory before to start to work with
 # it is better to return sequence one by one
 # and treat them as they are loaded.
- 
