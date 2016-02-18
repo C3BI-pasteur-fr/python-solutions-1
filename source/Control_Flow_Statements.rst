@@ -79,7 +79,9 @@ implementation
    print my_max(l)
    58
    
-   
+
+.. _enzyme_exercise:
+
 Exercise
 --------
 
