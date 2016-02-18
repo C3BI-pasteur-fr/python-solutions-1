@@ -5,6 +5,9 @@ class Sequence(object):
         self.comment = comment
         self.sequence = sequence
 
+    def gc_percent(self):
+        seq = self.sequence.upper()
+        return float(seq.count('G') + seq.count('C')) / float(len(seq))
 
 class FastaParser(object):
 
@@ -73,4 +76,5 @@ if __name__ == '__main__':
     fasta_parser = FastaParser(fasta_path)
     for sequence in fasta_parser:
         print "----------------"
-        print sequence.id
+        print "{seqid} = {gc:.3%}".format(gc=sequence.gc_percent(),
+                                          seqid = sequence.id)
