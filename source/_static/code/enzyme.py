@@ -31,12 +31,15 @@ class Sequence(object):
 class RestrictionEnzyme(object):
 
     def __init__(self, name, binding, cut, end, comment=''):
-        self.name = name
-        self.binding = binding
-        self.cut = cut
-        self.end = end
-        self.comment = comment
+        self._name = name
+        self._binding = binding
+        self._cut = cut
+        self._end = end
+        self._comment = comment
 
+    @property
+    def name(self):
+        return self._name
 
     def binds(self, seq):
         """
