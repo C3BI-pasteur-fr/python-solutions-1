@@ -32,7 +32,7 @@ Exercise
 --------
 
 Write a function which take the path of a file in rebase format
-and return in a dictionnary the collection of the enzyme contains in the file.
+and return in a dictionary the collection of the enzyme contains in the file.
 The sequence of the binding site must be cleaned up.
 
 use the file :download:`rebase_light.txt <_static/data/rebase_light.txt>` to test your code.
