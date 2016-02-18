@@ -1,6 +1,6 @@
 class Sequence(object):
 
-    def __init__(self, id_, comment, sequence):
+    def __init__(self, id_, sequence, comment=''):
         self.id = id_
         self.comment = comment
         self.sequence = sequence
@@ -40,8 +40,8 @@ class FastaParser(object):
                 # a new sequence begin
                 if self._current_id != '':
                     new_seq = Sequence(self._current_id,
-                                       self._current_comment,
-                                       self._current_sequence)
+                                       self._current_sequence,
+                                       comment=self._current_comment)
                     self._parse_header(line)
                     return new_seq
                 else:
@@ -53,8 +53,8 @@ class FastaParser(object):
             raise StopIteration()
         else:
             new_seq = Sequence(self._current_id,
-                               self._current_comment,
-                               self._current_sequence)
+                               self._current_sequence,
+                               comment=self._current_comment)
             self._current_id = ''
             self._current_sequence = ''
             return new_seq
