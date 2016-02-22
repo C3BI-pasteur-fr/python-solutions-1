@@ -20,11 +20,11 @@ Create 2 classes
  * Sequence
  * MutableSequence
 
-These 2 classes have same attributes but Sequence can be mutate and extend whereas Sequence are immutable.
+These 2 classes have same attributes but MutableSequence can be mutate and extend whereas Sequence are immutable.
 
 example of code using these classes: ::
 
-    >>> eco = Sequence('toto' , 'GAATTC')
+    >>> eco = MutableSequence('toto' , 'GAATTC')
     >>> eco.mutate(1, 'T')
     >>> eco.sequence
     'GTATTC'
@@ -46,7 +46,7 @@ how can you modeling
     * non mutable amino acid sequence
     * mutable amino acid sequence
 
-    can you easily extend your model to support no mutable/ mutable RNA sequence ?
+**bonus**: can you easily extend your model to support no mutable/ mutable RNA sequence ?
 
 
 .. literalinclude:: _static/code/multi_inheritance.py
