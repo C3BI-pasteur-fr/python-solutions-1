@@ -270,12 +270,12 @@ We want to perform a PCR on sv40, can you give the length and the sequence of th
 Write a function which have 3 parameters ``sequence``, ``primer_1`` and ``primer_2``
 
 * *We consider only the cases where primer_1 and primer_2 are present in sequence* 
-* *to simplify the exercise, the 2 primers can be read directly in the sv40 sequence.*
+* *to simplify the exercise, the 2 primers can be read directly on the sv40 sequence.*
 
 test you algorithm with the following primers 
 
 | primer_1 : 5' CGGGACTATGGTTGCTGACT 3'
-| primre_2 : 5' TCTTTCCGCCTCAGAAGGTA 3'
+| primer_2 : 5' TCTTTCCGCCTCAGAAGGTA 3'
 
 Write the pseudocode before to implement it.
 
@@ -312,7 +312,7 @@ reverse the following sequence "TACCTTCTGAGGCGGAAAGA" (don't compute the complem
    >>> s = "TACCTTCTGAGGCGGAAAGA"
    >>> l = list(s) 
    # take care reverse() reverse a list in place (the method do a side effect and return None ) 
-   # so if you don't have a obect reference on the list you cannot get the reversed list! 
+   # so if you don't have a object reference on the list you cannot get the reversed list!
    >>> l.reverse()
    >>> print l
    >>> ''.join(l)
@@ -361,7 +361,7 @@ Exercise
 
 Write a function 
 
-* which take a sequence as paramter
+* which take a sequence as parameter
 * compute the GC%
 * and return it
 * display the results readable for human as a micro report like this:

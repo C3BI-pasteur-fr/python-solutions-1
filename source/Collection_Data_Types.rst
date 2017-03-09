@@ -49,7 +49,7 @@ Exercise
    
 With mutable object like ``list`` when we mutate the object the state of the object is modified.
 But the reference to the object is still unchanged.
-So in this exemple we have two ways to access to the list [1,2] if we modify the state of the list itself.
+So in this example we have two ways to access to the list [1,2] if we modify the state of the list itself.
 but not the references to this object, then the 2 variables x and y still reference the list containing
 [1,2,3,4]. 
 
@@ -314,7 +314,7 @@ pseudo code 2
    say O(n2) and O(n6). Of course, we would prefer an algorithm requiring 1/2 · n2 steps to an algorithm requiring 1000 · n2 steps.
 
    When we write that the running time of an algorithm is O(n2), we technically mean that it does not grow faster than a function with a 
-   leading term of c · n2, for some constant c. Formally, a function f(n) is Big-O of function g(n), or O(g(n)), when f(n) ≤ c · g(n) for some 
+   leading term of c · n2, for some constant c. Formally, a function f(n) is Big-O of function g(n), or O(g(n)), when f(n) <= c · g(n) for some 
    constant c and sufficiently large n.
 
    For more on Big-O notation, see A `http://rob-bell.net/2009/06/a-beginners-guide-to-big-o-notation/Beginner's <Guide to Big-O Notation>`_.
